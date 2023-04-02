@@ -16,7 +16,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "preinstall": "npx only-allow yarn",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "lint": "ng lint"
   },
   "dependencies": {
     "@angular/animations": "^15.1.0",
@@ -33,11 +34,19 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^15.1.5",
+    "@angular-eslint/builder": "15.2.1",
+    "@angular-eslint/eslint-plugin": "15.2.1",
+    "@angular-eslint/eslint-plugin-template": "15.2.1",
+    "@angular-eslint/schematics": "15.2.1",
+    "@angular-eslint/template-parser": "15.2.1",
     "@angular/cli": "~15.1.5",
     "@angular/compiler-cli": "^15.1.0",
     "@commitlint/cli": "^17.5.1",
     "@commitlint/config-conventional": "^17.4.4",
     "@types/jasmine": "~4.3.0",
+    "@typescript-eslint/eslint-plugin": "5.48.2",
+    "@typescript-eslint/parser": "5.48.2",
+    "eslint": "^8.33.0",
     "husky": "^8.0.3",
     "jasmine-core": "~4.5.0",
     "karma": "~6.4.0",
