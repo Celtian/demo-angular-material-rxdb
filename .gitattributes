@@ -1,0 +1,5 @@
+* text eol=lf
+*.png binary
+
+yarn.lock -diff
+package-lock.json -diff
