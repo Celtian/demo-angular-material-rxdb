@@ -1,1 +1,32 @@
-{}
+{
+  "ERROR": {
+    "unexpected-exception": "Neočekávaná chyba"
+  },
+  "ROUTES": {
+    "app": {
+      "homepage": "domovska-stranka",
+      "not-found": "nenalezeno"
+    }
+  },
+  "SEO": {
+    "app": {
+      "homepage": {
+        "description": "Domovská stránka",
+        "title": "Domovská stránka"
+      },
+      "not-found": {
+        "description": "Tato stránka nebyla nalezena",
+        "title": "Stránka nebyla nalezena"
+      }
+    }
+  },
+  "TITLES": {
+    "app": {
+      "homepage": "Domovská stránka",
+      "not-found": "Stránka nebyla nalezena"
+    }
+  },
+  "not-found": {
+    "content": "Stránka nebyla nalezena"
+  }
+}

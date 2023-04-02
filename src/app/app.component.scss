@@ -1,0 +1,7 @@
+:host {
+  @apply flex flex-col min-h-screen;
+}
+
+.sticky-top {
+  @apply sticky top-0;
+}

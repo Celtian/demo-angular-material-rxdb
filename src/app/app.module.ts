@@ -1,16 +1,29 @@
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TitleStrategy } from '@angular/router';
 import { NgxAppVersionModule } from 'ngx-app-version';
 import { VERSION } from 'src/environments/version';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { I18nModule } from './i18n';
+import { CustomErrorHandlerService } from './shared/services/custom-error-handler.service';
+import { CustomTitleStrategyService } from './shared/services/custom-title-strategy.service';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+    MatSnackBarModule,
     I18nModule.forRoot({
       version: VERSION.version,
       defaultLanguage: 'en',
@@ -19,7 +32,12 @@ import { I18nModule } from './i18n';
       version: VERSION.version,
     }),
   ],
-  providers: [],
+  providers: [
+    { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { verticalPosition: 'top', horizontalPosition: 'right' } },
+    { provide: ErrorHandler, useClass: CustomErrorHandlerService },
+    { provide: TitleStrategy, useClass: CustomTitleStrategyService },
+    // { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

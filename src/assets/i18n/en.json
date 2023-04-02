@@ -1,1 +1,32 @@
-{}
+{
+  "ERROR": {
+    "unexpected-exception": "Unexpected error"
+  },
+  "ROUTES": {
+    "app": {
+      "homepage": "homepage",
+      "not-found": "not-found"
+    }
+  },
+  "SEO": {
+    "app": {
+      "homepage": {
+        "description": "Homepage",
+        "title": "Homepage"
+      },
+      "not-found": {
+        "description": "This website does not exist",
+        "title": "Page was not found"
+      }
+    }
+  },
+  "TITLES": {
+    "app": {
+      "homepage": "Homepage",
+      "not-found": "Page was not found"
+    }
+  },
+  "not-found": {
+    "content": "Page was not found"
+  }
+}
