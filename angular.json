@@ -7,7 +7,28 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "scss"
+          "changeDetection": "OnPush",
+          "style": "scss",
+          "skipTests": true
+        },
+        "@schematics/angular:application": {
+          "strict": true
+        },
+        "@schematics/angular:class": {
+          "skipTests": true
+        },
+        "@schematics/angular:directive": {
+          "skipTests": true
+        },
+        "@schematics/angular:guard": {
+          "skipTests": true
+        },
+        "@schematics/angular:module": {},
+        "@schematics/angular:pipe": {
+          "skipTests": true
+        },
+        "@schematics/angular:service": {
+          "skipTests": true
         }
       },
       "root": "",
@@ -105,6 +126,15 @@
               "src/**/*.ts",
               "src/**/*.html"
             ]
+          }
+        },
+        "version": {
+          "builder": "ngx-devkit-builders:version",
+          "options": {
+            "outputFile": "src/environments/version.ts",
+            "fields": ["version", "date", "git", "author"],
+            "lint": "eslint",
+            "verbose": false
           }
         }
       }
