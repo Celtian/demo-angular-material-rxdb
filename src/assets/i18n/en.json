@@ -98,6 +98,12 @@
       }
     }
   },
+  "input": {
+    "search": {
+      "label": "Search",
+      "placeholder": "Type something here…"
+    }
+  },
   "mat-paginator": {
     "first-page": "First page",
     "items-per-page": "Items per page",
