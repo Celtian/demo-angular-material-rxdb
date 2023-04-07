@@ -49,7 +49,9 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/robots.txt",
+              "src/humans.txt"
             ],
             "styles": [
               "@angular/material/prebuilt-themes/indigo-pink.css",
@@ -113,7 +115,9 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/robots.txt",
+              "src/humans.txt"
             ],
             "styles": [
               "@angular/material/prebuilt-themes/indigo-pink.css",
