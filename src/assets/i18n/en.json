@@ -8,6 +8,7 @@
     }
   },
   "ERROR": {
+    "post-was-not-found": "Post was not found",
     "unexpected-exception": "Unexpected error"
   },
   "ROUTES": {
@@ -61,12 +62,29 @@
   "UNI": {
     "clear": "Clear",
     "clear-filters": "Clear filters",
+    "close": "Close",
     "create": "Create",
     "delete": "Delete",
     "detail": "Detail",
     "edit": "Edit",
+    "no": "No",
     "reset": "Reset",
-    "submit": "Submit"
+    "submit": "Submit",
+    "yes": "Yes"
+  },
+  "custom-confirm-dialog": {
+    "default": {
+      "content": "Do you want to confirm operation?",
+      "title": "Confirm operation"
+    },
+    "delete-post": {
+      "content": "Do you want to delete post?",
+      "title": "Delete post"
+    },
+    "unsaved-work": {
+      "content": "Do you really want to leave this page?",
+      "title": "Unsaved work"
+    }
   },
   "form": {
     "post": {
@@ -89,6 +107,19 @@
   },
   "not-found": {
     "content": "Page was not found"
+  },
+  "post-detail": {
+    "about-post": "Post content"
+  },
+  "response": {
+    "create": {
+      "failed": "Creation failed",
+      "success": "Successfully created"
+    },
+    "delete": {
+      "failed": "Deletion failed",
+      "success": "Successfully deleted"
+    }
   },
   "table": {
     "posts": {

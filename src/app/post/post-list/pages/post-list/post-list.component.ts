@@ -1,10 +1,15 @@
 import { CdkPortal } from '@angular/cdk/portal';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LocalizeRouterService } from '@gilsdav/ngx-translate-router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { TranslateService } from '@ngx-translate/core';
 import { debounceTime, filter, first, switchMap } from 'rxjs';
+import {
+  CustomConfirmDialog,
+  CustomConfirmDialogService,
+} from 'src/app/confirm-dialog/services/custom-confirm-dialog.service';
 import { ROUTES } from 'src/app/shared/constants/route.constant';
 import { PostDto } from 'src/app/shared/dto/post.dto';
 import { ApiService } from 'src/app/shared/services/api.service';
@@ -40,7 +45,9 @@ export class PostListComponent implements OnInit, OnDestroy {
     private translate: TranslateService,
     private seoService: SeoService,
     private language: LanguageService,
-    private lr: LocalizeRouterService
+    private lr: LocalizeRouterService,
+    private confirm: CustomConfirmDialogService,
+    private snackBar: MatSnackBar
   ) {}
 
   public ngOnDestroy(): void {
@@ -110,7 +117,6 @@ export class PostListComponent implements OnInit, OnDestroy {
   }
 
   public onDelete(row: PostDto): void {
-    /*
     this.confirm
       .openCustomConfirmDialog(CustomConfirmDialog.Delete)
       .pipe(
@@ -128,7 +134,6 @@ export class PostListComponent implements OnInit, OnDestroy {
           this.snackBar.open(this.translate.instant('response.delete.failed'), this.translate.instant('UNI.close'));
         },
       });
-      */
   }
 
   public onClear(): void {

@@ -8,6 +8,7 @@
     }
   },
   "ERROR": {
+    "post-was-not-found": "Příspěvek nebyl nalezen",
     "unexpected-exception": "Neočekávaná chyba"
   },
   "ROUTES": {
@@ -61,12 +62,29 @@
   "UNI": {
     "clear": "Vymazat",
     "clear-filters": "Vymazat filtry",
+    "close": "Zavřít",
     "create": "Vytvořit",
     "delete": "Smazat",
     "detail": "Detail",
     "edit": "Upravit",
+    "no": "Ne",
     "reset": "Resetovat",
-    "submit": "Potvrdit"
+    "submit": "Potvrdit",
+    "yes": "Ano"
+  },
+  "custom-confirm-dialog": {
+    "default": {
+      "content": "Opravdu chcete potvrdit operaci?",
+      "title": "Potvrzení operace"
+    },
+    "delete-post": {
+      "content": "Opravdu chcete smazat příspěvek?",
+      "title": "Mazání příspěvku"
+    },
+    "unsaved-work": {
+      "content": "Opravdu chcete opustit tuto stránku?",
+      "title": "Neuložená práce"
+    }
   },
   "form": {
     "post": {
@@ -89,6 +107,19 @@
   },
   "not-found": {
     "content": "Stránka nebyla nalezena"
+  },
+  "post-detail": {
+    "about-post": "Obsah příspěvku"
+  },
+  "response": {
+    "create": {
+      "failed": "Vytváření se nezdařilo",
+      "success": "Úspěšně vytvořeno"
+    },
+    "delete": {
+      "failed": "Mazání se nezdařilo",
+      "success": "Úspěšně smazáno"
+    }
   },
   "table": {
     "posts": {

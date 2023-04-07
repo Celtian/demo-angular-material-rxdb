@@ -8,6 +8,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { TranslateModule } from '@ngx-translate/core';
+import { ConfirmDialogModule } from 'src/app/confirm-dialog/confirm-dialog.module';
 import { PostListComponent } from './pages/post-list/post-list.component';
 import { PostListRoutingModule } from './post-list-routing.module';
 
@@ -24,6 +25,7 @@ import { PostListRoutingModule } from './post-list-routing.module';
     MatButtonModule,
     TranslateModule,
     PortalModule,
+    ConfirmDialogModule,
   ],
 })
 export class PostListModule {}
