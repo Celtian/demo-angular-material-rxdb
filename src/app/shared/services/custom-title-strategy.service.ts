@@ -7,7 +7,7 @@ import { TranslateService } from '@ngx-translate/core';
   providedIn: 'root',
 })
 export class CustomTitleStrategyService extends TitleStrategy {
-  private readonly siteName = 'CRUD demo';
+  private readonly siteName = 'RDXB demo';
 
   constructor(private translateService: TranslateService, private title: Title) {
     super();

@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@
 import { ActivatedRoute, Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { debounceTime, filter, first, switchMap } from 'rxjs';
+import { ROUTES } from 'src/app/shared/constants/route.constant';
 import { PostDto } from 'src/app/shared/dto/post.dto';
 import { ApiService } from 'src/app/shared/services/api.service';
 import { RxdbProvider } from 'src/app/shared/services/db.service';
@@ -17,6 +18,7 @@ export class PostListComponent implements OnInit {
   public data: PostDto[] = [];
   public totalCount = 0;
 
+  public readonly ROUTES = ROUTES;
   public readonly displayedColumns: string[] = ['id', 'title', 'actions'];
   public readonly pageSizeOptions = [5, 10, 25, 100];
 

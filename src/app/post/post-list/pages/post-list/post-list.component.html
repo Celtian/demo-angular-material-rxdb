@@ -24,12 +24,10 @@
           <mat-icon>info</mat-icon>
           <span>{{ 'UNI.detail' | translate }}</span>
         </a>
-        <!--
         <a mat-menu-item [routerLink]="['/' + row.id + '/' + ROUTES.POSTS.EDIT | localize]">
           <mat-icon>edit</mat-icon>
           <span>{{ 'UNI.edit' | translate }}</span>
         </a>
-        -->
         <button mat-menu-item (click)="onDelete(row)">
           <mat-icon>delete</mat-icon>
           <span>{{ 'UNI.delete' | translate }}</span>

@@ -14,6 +14,16 @@ export const routes: Routes = [
     loadChildren: () => import('./post/post-create/post-create.module').then((m) => m.PostCreateModule),
   },
   {
+    path: ':id',
+    title: ROUTES.POSTS.DETAIL,
+    loadChildren: () => import('./post/post-detail/post-detail.module').then((m) => m.PostDetailModule),
+  },
+  {
+    path: `:id/${ROUTES.POSTS.EDIT}`,
+    title: ROUTES.POSTS.EDIT,
+    loadChildren: () => import('./post/post-edit/post-edit.module').then((m) => m.PostEditModule),
+  },
+  {
     path: '**',
     title: ROUTES.APP.NOT_FOUND,
     loadChildren: () => import('./not-found/not-found.module').then((m) => m.NotFoundModule),
