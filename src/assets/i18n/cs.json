@@ -4,7 +4,8 @@
       "posts": "Příspěvky"
     },
     "posts": {
-      "create": "Vytvořit"
+      "create": "Vytvořit",
+      "edit": "Upravit"
     }
   },
   "ERROR": {
@@ -119,6 +120,10 @@
     "delete": {
       "failed": "Mazání se nezdařilo",
       "success": "Úspěšně smazáno"
+    },
+    "update": {
+      "failed": "Ukládání se nezdařilo",
+      "success": "Úspěšně uloženo"
     }
   },
   "table": {

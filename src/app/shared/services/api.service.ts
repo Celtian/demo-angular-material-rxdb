@@ -22,12 +22,14 @@ export class ApiService<T> {
     ).pipe(map((doc) => doc._data));
   }
 
-  public patch(id: string, body: T) {
-    return from(this.collection.findOne({ selector: { id } }).update({ id, ...body })).pipe(map((doc) => doc._data));
+  public patch(id: string, body: Partial<T>) {
+    return from(this.collection.findOne({ selector: { id } }).update({ id, ...body })).pipe(
+      map((doc) => ({ ...doc._data, ...body }))
+    );
   }
 
   public put(id: string, body: T) {
-    return from(this.collection.upsert({ id, ...body })).pipe(map((doc) => doc._data));
+    return from(this.collection.upsert({ id, ...body })).pipe(map((doc) => ({ ...doc._data, ...body })));
   }
 
   public detail(id: string) {

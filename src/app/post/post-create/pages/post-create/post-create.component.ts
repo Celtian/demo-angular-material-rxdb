@@ -6,9 +6,14 @@ import { Router } from '@angular/router';
 import { LocalizeRouterService } from '@gilsdav/ngx-translate-router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { TranslateService } from '@ngx-translate/core';
-import { first } from 'rxjs';
+import { Observable, first } from 'rxjs';
+import {
+  CustomConfirmDialog,
+  CustomConfirmDialogService,
+} from 'src/app/confirm-dialog/services/custom-confirm-dialog.service';
 import { ROUTES } from 'src/app/shared/constants/route.constant';
 import { PostDto, PostInputDto } from 'src/app/shared/dto/post.dto';
+import { CanComponentDeactivate } from 'src/app/shared/guards/can-deactivate-guard.service';
 import { ApiService } from 'src/app/shared/services/api.service';
 import { BreadcrumbsPortalService } from 'src/app/shared/services/breadcrumbs-portal.service';
 import { LanguageService } from 'src/app/shared/services/language.service';
@@ -21,7 +26,7 @@ import { SeoService } from 'src/app/shared/services/seo.service';
   styleUrls: ['./post-create.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PostCreateComponent implements OnDestroy, OnInit {
+export class PostCreateComponent implements OnDestroy, OnInit, CanComponentDeactivate {
   @ViewChild(CdkPortal, { static: true }) public portalContent!: CdkPortal;
 
   public readonly ROUTES = ROUTES;
@@ -41,8 +46,13 @@ export class PostCreateComponent implements OnDestroy, OnInit {
     private translate: TranslateService,
     private lr: LocalizeRouterService,
     private snackBar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private confirm: CustomConfirmDialogService
   ) {}
+
+  public canDeactivate(): boolean | Observable<boolean> {
+    return this.form.pristine || this.confirm.openCustomConfirmDialog(CustomConfirmDialog.UnsavedWork);
+  }
 
   public ngOnInit(): void {
     this.breadcrumbsPortalService.setPortal(this.portalContent);
