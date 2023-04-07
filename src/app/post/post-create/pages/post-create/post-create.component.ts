@@ -1,8 +1,18 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { CdkPortal } from '@angular/cdk/portal';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { UntilDestroy } from '@ngneat/until-destroy';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { LocalizeRouterService } from '@gilsdav/ngx-translate-router';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { TranslateService } from '@ngx-translate/core';
+import { first } from 'rxjs';
+import { ROUTES } from 'src/app/shared/constants/route.constant';
+import { PostDto, PostInputDto } from 'src/app/shared/dto/post.dto';
 import { ApiService } from 'src/app/shared/services/api.service';
-import { RxdbProvider } from 'src/app/shared/services/db.service';
+import { BreadcrumbsPortalService } from 'src/app/shared/services/breadcrumbs-portal.service';
+import { LanguageService } from 'src/app/shared/services/language.service';
+import { SeoService } from 'src/app/shared/services/seo.service';
 
 @UntilDestroy()
 @Component({
@@ -11,7 +21,11 @@ import { RxdbProvider } from 'src/app/shared/services/db.service';
   styleUrls: ['./post-create.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PostCreateComponent {
+export class PostCreateComponent implements OnDestroy, OnInit {
+  @ViewChild(CdkPortal, { static: true }) public portalContent!: CdkPortal;
+
+  public readonly ROUTES = ROUTES;
+
   public form = this.fb.group({
     title: new FormControl<string>('', { nonNullable: true, validators: [Validators.required, Validators.min(3)] }),
     body: new FormControl<string>('', { nonNullable: true, validators: [Validators.required, Validators.min(3)] }),
@@ -19,34 +33,53 @@ export class PostCreateComponent {
 
   constructor(
     private fb: FormBuilder,
-    private apiService: ApiService<{ body: string; title: string }>,
-    private rxdbProvider: RxdbProvider
+    private apiService: ApiService<PostDto>,
+    private breadcrumbsPortalService: BreadcrumbsPortalService,
+    private cdr: ChangeDetectorRef,
+    private language: LanguageService,
+    private seoService: SeoService,
+    private translate: TranslateService,
+    private lr: LocalizeRouterService,
+    private snackBar: MatSnackBar,
+    private router: Router
   ) {}
 
-  public onSubmit() {
-    this.rxdbProvider.dataBaseReady$.subscribe((res) => console.log(res));
+  public ngOnInit(): void {
+    this.breadcrumbsPortalService.setPortal(this.portalContent);
+    setTimeout(() => this.cdr.detectChanges(), 0);
 
-    console.log('create');
-    this.apiService.create({ title: 'test', body: 'body' }).subscribe((res) => {
-      console.log('x', res);
-
-      this.apiService.list().subscribe((ress) => {
-        console.log('i', ress);
-
-        /*
-        this.apiService.delete(ress[0].id).subscribe((res) => {
-          console.log('e', res);
-        });
-        */
-
-        this.apiService.patch(ress[0].id, { title: 'title', body: 'XXXXX' }).subscribe((res) => {
-          console.log(res);
-          this.apiService.list().subscribe((res) => {
-            console.log('ii', res);
-          });
-        });
-      });
+    this.language.language$.pipe(untilDestroyed(this)).subscribe(() => {
+      const canonical = this.lr.translateRoute(`/${ROUTES.POSTS.CREATE}`) as string;
+      this.seoService.setSeo(
+        {
+          title: this.translate.instant(`SEO.${ROUTES.POSTS.CREATE}.title`),
+          description: this.translate.instant(`SEO.${ROUTES.POSTS.CREATE}.description`),
+        },
+        canonical
+      );
     });
+  }
+
+  public ngOnDestroy(): void {
+    this.portalContent?.detach();
+  }
+
+  public onSubmit() {
+    this.apiService
+      .create(this.form.value as PostInputDto)
+      .pipe(first())
+      .subscribe({
+        next: (post) => {
+          this.form.reset(post);
+          this.cdr.markForCheck();
+          this.snackBar.open(this.translate.instant('response.create.success'), this.translate.instant('UNI.close'));
+          const translatedRoute = this.lr.translateRoute(`/`);
+          this.router.navigate([translatedRoute]);
+        },
+        error: () => {
+          this.snackBar.open(this.translate.instant('response.create.failed'), this.translate.instant('UNI.close'));
+        },
+      });
   }
 
   public onReset(event: Event): void {

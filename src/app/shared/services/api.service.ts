@@ -13,7 +13,7 @@ export class ApiService<T> {
     return this.rxdbProvider.getDatabaseCollection('posts');
   }
 
-  public create(body: T) {
+  public create(body: Partial<T>) {
     return from(
       this.collection.insert({
         id: uuidv4(),

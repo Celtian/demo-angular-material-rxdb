@@ -1,3 +1,4 @@
+import { PortalModule } from '@angular/cdk/portal';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -20,6 +21,7 @@ import { PostCreateRoutingModule } from './post-create-routing.module';
     MatInputModule,
     MatButtonModule,
     MatTooltipModule,
+    PortalModule,
     PostCreateRoutingModule,
     TranslateModule,
   ],

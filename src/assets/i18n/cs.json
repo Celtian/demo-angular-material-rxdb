@@ -1,4 +1,12 @@
 {
+  "BREADCRUMBS": {
+    "app": {
+      "posts": "Příspěvky"
+    },
+    "posts": {
+      "create": "Vytvořit"
+    }
+  },
   "ERROR": {
     "unexpected-exception": "Neočekávaná chyba"
   },
@@ -52,6 +60,8 @@
   },
   "UNI": {
     "clear": "Vymazat",
+    "clear-filters": "Vymazat filtry",
+    "create": "Vytvořit",
     "delete": "Smazat",
     "detail": "Detail",
     "edit": "Upravit",

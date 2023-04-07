@@ -1,3 +1,4 @@
+import { PortalModule } from '@angular/cdk/portal';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -26,6 +27,7 @@ import { MatPaginationIntlService } from './shared/services/mat-paginator-intl.s
     MatIconModule,
     MatButtonModule,
     MatSnackBarModule,
+    PortalModule,
     I18nModule.forRoot({
       version: VERSION.version,
       defaultLanguage: 'en',

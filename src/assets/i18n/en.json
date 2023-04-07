@@ -1,4 +1,12 @@
 {
+  "BREADCRUMBS": {
+    "app": {
+      "posts": "Posts"
+    },
+    "posts": {
+      "create": "Create"
+    }
+  },
   "ERROR": {
     "unexpected-exception": "Unexpected error"
   },
@@ -52,6 +60,8 @@
   },
   "UNI": {
     "clear": "Clear",
+    "clear-filters": "Clear filters",
+    "create": "Create",
     "delete": "Delete",
     "detail": "Detail",
     "edit": "Edit",

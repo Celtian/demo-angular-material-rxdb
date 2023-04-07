@@ -1,3 +1,9 @@
+<div class="flex items-end justify-end gap-2">
+  <button mat-button (click)="onClear()">{{ 'UNI.clear-filters' | translate }}</button>
+
+  <a mat-button [routerLink]="['/' + ROUTES.POSTS.CREATE | localize]">{{ 'UNI.create' | translate }}</a>
+</div>
+
 <table mat-table [fixedLayout]="true" [dataSource]="data" [trackBy]="trackByPostId">
   <ng-container matColumnDef="id">
     <th mat-header-cell *matHeaderCellDef>{{ 'table.posts.id.title' | translate }}</th>
@@ -46,3 +52,7 @@
   (page)="onPageChange($event)"
   aria-label="Select page of posts"
 ></mat-paginator>
+
+<div *cdkPortal class="container py-4">
+  <a mat-button color="primary" [routerLink]="['/' | localize]">{{ 'BREADCRUMBS.app.posts' | translate }}</a>
+</div>
