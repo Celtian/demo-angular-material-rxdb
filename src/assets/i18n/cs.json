@@ -4,26 +4,50 @@
   },
   "ROUTES": {
     "app": {
-      "homepage": "domovska-stranka",
-      "not-found": "nenalezeno"
+      "not-found": "nenalezeno",
+      "posts": "prispevky"
+    },
+    "posts": {
+      "create": "vytvorit",
+      "detail": "detail",
+      "edit": "upravit"
     }
   },
   "SEO": {
     "app": {
-      "homepage": {
-        "description": "Domovská stránka",
-        "title": "Domovská stránka"
-      },
       "not-found": {
         "description": "Tato stránka nebyla nalezena",
         "title": "Stránka nebyla nalezena"
+      },
+      "posts": {
+        "description": "Seznam příspěvků",
+        "title": "Seznam příspěvků"
+      }
+    },
+    "posts": {
+      "create": {
+        "description": "Vytvořit příspěvek",
+        "title": "Vytvořit příspěvek"
+      },
+      "detail": {
+        "description": "Detail příspěvku",
+        "title": "Detail příspěvku"
+      },
+      "edit": {
+        "description": "Upravit příspěvek",
+        "title": "Upravit příspěvek"
       }
     }
   },
   "TITLES": {
     "app": {
-      "homepage": "Domovská stránka",
-      "not-found": "Stránka nebyla nalezena"
+      "not-found": "Stránka nebyla nalezena",
+      "posts": "Seznam příspěvků"
+    },
+    "posts": {
+      "create": "Vytvořit příspěvek",
+      "detail": "Detail příspěvku",
+      "edit": "Upravit příspěvek"
     }
   },
   "UNI": {
@@ -43,6 +67,14 @@
         "label": "Název"
       }
     }
+  },
+  "mat-paginator": {
+    "first-page": "První stránka",
+    "items-per-page": "Položek na stránku",
+    "last-page": "Poslední stránka",
+    "next-page": "Další stránka",
+    "of": "z",
+    "previous-page": "Předchozí stránka"
   },
   "not-found": {
     "content": "Stránka nebyla nalezena"

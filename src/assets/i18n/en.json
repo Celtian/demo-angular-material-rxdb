@@ -4,26 +4,50 @@
   },
   "ROUTES": {
     "app": {
-      "homepage": "homepage",
-      "not-found": "not-found"
+      "not-found": "not-found",
+      "posts": "posts"
+    },
+    "posts": {
+      "create": "create",
+      "detail": "detail",
+      "edit": "edit"
     }
   },
   "SEO": {
     "app": {
-      "homepage": {
-        "description": "Homepage",
-        "title": "Homepage"
-      },
       "not-found": {
         "description": "This website does not exist",
         "title": "Page was not found"
+      },
+      "posts": {
+        "description": "List of posts",
+        "title": "List of posts"
+      }
+    },
+    "posts": {
+      "create": {
+        "description": "Create post",
+        "title": "Create post"
+      },
+      "detail": {
+        "description": "Post detail",
+        "title": "Post detail"
+      },
+      "edit": {
+        "description": "Edit post",
+        "title": "Edit post"
       }
     }
   },
   "TITLES": {
     "app": {
-      "homepage": "Homepage",
-      "not-found": "Page was not found"
+      "not-found": "Page was not found",
+      "posts": "List of posts"
+    },
+    "posts": {
+      "create": "Create post",
+      "detail": "Post detail",
+      "edit": "Edit post"
     }
   },
   "UNI": {
@@ -43,6 +67,14 @@
         "label": "Title"
       }
     }
+  },
+  "mat-paginator": {
+    "first-page": "First page",
+    "items-per-page": "Items per page",
+    "last-page": "Last page",
+    "next-page": "Next page",
+    "of": "from",
+    "previous-page": "Previous page"
   },
   "not-found": {
     "content": "Page was not found"

@@ -2,7 +2,12 @@ import { RouteDefinitionDto } from '../dto/route.dto';
 
 export const ROUTES: RouteDefinitionDto<string> = {
   APP: {
-    HOMEPAGE: 'app.homepage',
+    POSTS: 'app.posts',
     NOT_FOUND: 'app.not-found',
+  },
+  POSTS: {
+    DETAIL: 'posts.detail',
+    CREATE: 'posts.create',
+    EDIT: 'posts.edit',
   },
 };

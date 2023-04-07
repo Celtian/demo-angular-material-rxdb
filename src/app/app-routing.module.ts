@@ -5,10 +5,13 @@ import { ROUTES } from './shared/constants/route.constant';
 export const routes: Routes = [
   {
     path: '',
-    title: ROUTES.APP.HOMEPAGE,
-    // loadChildren: () => import('./homepage/homepage.module').then((m) => m.HomepageModule),
-    // loadChildren: () => import('./post/post-create/post-create.module').then((m) => m.PostCreateModule),
+    title: ROUTES.APP.POSTS,
     loadChildren: () => import('./post/post-list/post-list.module').then((m) => m.PostListModule),
+  },
+  {
+    path: ROUTES.POSTS.CREATE,
+    title: ROUTES.POSTS.CREATE,
+    loadChildren: () => import('./post/post-create/post-create.module').then((m) => m.PostCreateModule),
   },
   {
     path: '**',
