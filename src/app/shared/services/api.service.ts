@@ -40,12 +40,14 @@ export class ApiService<T> {
     return from(this.collection.findOne({ selector: { id } }).remove()).pipe(map((doc) => doc._data));
   }
 
-  public list(page = 1, limit = 5) {
+  public list(page = 1, limit = 5, query = '') {
+    const selector = query ? { title: { $regex: new RegExp(query, 'i') } } : undefined;
     return from(
       this.collection
         .find({
           skip: page - 1,
           limit,
+          selector,
         })
         .exec()
     ).pipe(map((docs) => docs.map((doc) => doc._data)));
@@ -55,8 +57,8 @@ export class ApiService<T> {
     return from(this.collection.count().exec());
   }
 
-  public listAndCount(page = 1, limit = 5) {
-    return combineLatest([this.list(page, limit), this.count()]).pipe(
+  public listAndCount(page = 1, limit = 5, query = '') {
+    return combineLatest([this.list(page, limit, query), this.count()]).pipe(
       map(([items, totalCount]) => ({
         items,
         totalCount,

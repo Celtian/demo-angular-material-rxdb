@@ -30,6 +30,7 @@ export class PostListComponent implements OnInit, OnDestroy {
 
   public data: PostDto[] = [];
   public totalCount = 0;
+  public query = '';
 
   public readonly ROUTES = ROUTES;
   public readonly displayedColumns: string[] = ['id', 'title', 'actions'];
@@ -86,10 +87,10 @@ export class PostListComponent implements OnInit, OnDestroy {
           this.apiService.listAndCount(
             // TODO move to coerce utils
             Number.isNaN(Number(params?.['pageIndex'])) ? 1 : Number(params?.['pageIndex']),
-            Number.isNaN(Number(params?.['pageSize'])) ? 5 : Number(params?.['pageSize'])
+            Number.isNaN(Number(params?.['pageSize'])) ? 5 : Number(params?.['pageSize']),
             // params?.['sortBy'] as any,
             // params?.['sortDirection'] as any,
-            // params?.['query'] as any
+            params?.['query'] as any
           )
         ),
         untilDestroyed(this)
@@ -136,11 +137,35 @@ export class PostListComponent implements OnInit, OnDestroy {
       });
   }
 
-  public onClear(): void {
-    // this.query = '';
+  public onQueryChange(event: any): void {
+    const query = event.target.value;
     this.router.navigate([], {
       queryParams: {
-        // query: null,
+        query: query ? encodeURIComponent(query) : null,
+        pageIndex: null,
+      },
+      queryParamsHandling: 'merge',
+      replaceUrl: true,
+    });
+  }
+
+  public onQueryRemove(): void {
+    this.query = '';
+    this.router.navigate([], {
+      queryParams: {
+        query: null,
+        pageIndex: null,
+      },
+      queryParamsHandling: 'merge',
+      replaceUrl: true,
+    });
+  }
+
+  public onClear(): void {
+    this.query = '';
+    this.router.navigate([], {
+      queryParams: {
+        query: null,
         pageIndex: null,
         pageSize: null,
         // sortBy: null,
