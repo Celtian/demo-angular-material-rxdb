@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { combineLatest, from, map } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
+import { PostDto } from '../dto/post.dto';
 import { RxdbProvider } from './db.service';
 
 @Injectable({
@@ -40,7 +41,7 @@ export class ApiService<T> {
     return from(this.collection.findOne({ selector: { id } }).remove()).pipe(map((doc) => doc._data));
   }
 
-  public list(page = 1, limit = 5, query = '') {
+  public list(page = 1, limit = 5, sort: keyof PostDto = 'id', order: 'asc' | 'desc' = 'asc', query = '') {
     const selector = query ? { title: { $regex: new RegExp(query, 'i') } } : undefined;
     return from(
       this.collection
@@ -48,6 +49,11 @@ export class ApiService<T> {
           skip: page - 1,
           limit,
           selector,
+          sort: [
+            {
+              [sort]: order,
+            },
+          ],
         })
         .exec()
     ).pipe(map((docs) => docs.map((doc) => doc._data)));
@@ -57,8 +63,8 @@ export class ApiService<T> {
     return from(this.collection.count().exec());
   }
 
-  public listAndCount(page = 1, limit = 5, query = '') {
-    return combineLatest([this.list(page, limit, query), this.count()]).pipe(
+  public listAndCount(page = 1, limit = 5, sort: keyof PostDto = 'id', order: 'asc' | 'desc' = 'asc', query = '') {
+    return combineLatest([this.list(page, limit, sort, order, query), this.count()]).pipe(
       map(([items, totalCount]) => ({
         items,
         totalCount,

@@ -88,8 +88,8 @@ export class PostListComponent implements OnInit, OnDestroy {
             // TODO move to coerce utils
             Number.isNaN(Number(params?.['pageIndex'])) ? 1 : Number(params?.['pageIndex']),
             Number.isNaN(Number(params?.['pageSize'])) ? 5 : Number(params?.['pageSize']),
-            // params?.['sortBy'] as any,
-            // params?.['sortDirection'] as any,
+            params?.['sortBy'] as any,
+            params?.['sortDirection'] as any,
             params?.['query'] as any
           )
         ),
@@ -137,6 +137,18 @@ export class PostListComponent implements OnInit, OnDestroy {
       });
   }
 
+  public onSortChange(event: any): void {
+    this.router.navigate([], {
+      queryParams: {
+        sortBy: event.active,
+        sortDirection: event.direction,
+        pageIndex: null,
+      },
+      queryParamsHandling: 'merge',
+      replaceUrl: true,
+    });
+  }
+
   public onQueryChange(event: any): void {
     const query = event.target.value;
     this.router.navigate([], {
@@ -168,8 +180,8 @@ export class PostListComponent implements OnInit, OnDestroy {
         query: null,
         pageIndex: null,
         pageSize: null,
-        // sortBy: null,
-        // sortDirection: null,
+        sortBy: null,
+        sortDirection: null,
       },
       queryParamsHandling: 'merge',
       replaceUrl: true,

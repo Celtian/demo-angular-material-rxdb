@@ -24,16 +24,26 @@
   <a mat-button [routerLink]="['/' + ROUTES.POSTS.CREATE | localize]">{{ 'UNI.create' | translate }}</a>
 </div>
 
-<table mat-table [fixedLayout]="true" [dataSource]="data" [trackBy]="trackByPostId">
+<table
+  mat-table
+  [fixedLayout]="true"
+  [dataSource]="data"
+  matSort
+  matSortActive="id"
+  matSortDirection="asc"
+  matSortDisableClear
+  [trackBy]="trackByPostId"
+  (matSortChange)="onSortChange($event)"
+>
   <ng-container matColumnDef="id">
-    <th mat-header-cell *matHeaderCellDef>{{ 'table.posts.id.title' | translate }}</th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>{{ 'table.posts.id.title' | translate }}</th>
     <td mat-cell *matCellDef="let row">
       {{ '#' + row.id }}
     </td>
   </ng-container>
 
   <ng-container matColumnDef="title">
-    <th mat-header-cell *matHeaderCellDef>{{ 'table.posts.title.title' | translate }}</th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>{{ 'table.posts.title.title' | translate }}</th>
     <td mat-cell *matCellDef="let row">
       {{ row.title }}
     </td>
