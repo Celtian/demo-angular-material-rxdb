@@ -51,7 +51,7 @@ export class PostListComponent implements OnInit, OnDestroy {
     this.breadcrumbsPortalService.setPortal(this.portalContent);
 
     this.language.language$.pipe(untilDestroyed(this)).subscribe(() => {
-      const canonical = this.lr.translateRoute(`/${ROUTES.APP.POSTS}`) as string;
+      const canonical = this.lr.translateRoute(`/`) as string;
       this.seoService.setSeo(
         {
           title: this.translate.instant(`SEO.${ROUTES.APP.POSTS}.title`),
