@@ -26,7 +26,35 @@
       "not-found": "Stránka nebyla nalezena"
     }
   },
+  "UNI": {
+    "clear": "Vymazat",
+    "delete": "Smazat",
+    "detail": "Detail",
+    "reset": "Resetovat",
+    "submit": "Potvrdit"
+  },
+  "form": {
+    "post": {
+      "body": {
+        "label": "Obsah",
+        "placeholder": "Napiště něco zde…"
+      },
+      "title": {
+        "label": "Název"
+      }
+    }
+  },
   "not-found": {
     "content": "Stránka nebyla nalezena"
+  },
+  "table": {
+    "posts": {
+      "id": {
+        "title": "ID"
+      },
+      "title": {
+        "title": "Název"
+      }
+    }
   }
 }

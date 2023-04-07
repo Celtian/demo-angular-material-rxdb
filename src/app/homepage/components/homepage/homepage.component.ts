@@ -5,6 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ROUTES } from 'src/app/shared/constants/route.constant';
 import { LanguageService } from 'src/app/shared/services/language.service';
 import { SeoService } from 'src/app/shared/services/seo.service';
+import { HomepageService } from '../../services/homepage.service';
 
 @UntilDestroy()
 @Component({
@@ -18,7 +19,8 @@ export class HomepageComponent implements OnInit {
     private seoService: SeoService,
     private translate: TranslateService,
     private lr: LocalizeRouterService,
-    private language: LanguageService
+    private language: LanguageService,
+    private dataSource: HomepageService // private rxdbProvider: RxdbProvider
   ) {}
 
   public ngOnInit(): void {
@@ -32,5 +34,23 @@ export class HomepageComponent implements OnInit {
         canonical
       );
     });
+
+    // this.dataSource.createCollection();
+    /*
+    const db = this.rxdbProvider.initDB('photo-lib');
+    from(db)
+      .pipe(untilDestroyed(this))
+      .subscribe(() => {
+        const count = this.rxdbProvider.getDatabaseCollection('photos').find();
+        console.log(count);
+      });
+      */
+
+    /*
+    setTimeout(() => {
+      const count = this.rxdbProvider.getDatabaseCollection('photos').count();
+      console.log(count);
+    }, 2000);
+    */
   }
 }

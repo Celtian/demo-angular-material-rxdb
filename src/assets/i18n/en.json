@@ -26,7 +26,35 @@
       "not-found": "Page was not found"
     }
   },
+  "UNI": {
+    "clear": "Clear",
+    "delete": "Delete",
+    "detail": "Detail",
+    "reset": "Reset",
+    "submit": "Submit"
+  },
+  "form": {
+    "post": {
+      "body": {
+        "label": "Body",
+        "placeholder": "Type something here…"
+      },
+      "title": {
+        "label": "Title"
+      }
+    }
+  },
   "not-found": {
     "content": "Page was not found"
+  },
+  "table": {
+    "posts": {
+      "id": {
+        "title": "ID"
+      },
+      "title": {
+        "title": "Title"
+      }
+    }
   }
 }

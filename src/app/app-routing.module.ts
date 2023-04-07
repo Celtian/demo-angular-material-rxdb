@@ -6,7 +6,9 @@ export const routes: Routes = [
   {
     path: '',
     title: ROUTES.APP.HOMEPAGE,
-    loadChildren: () => import('./homepage/homepage.module').then((m) => m.HomepageModule),
+    // loadChildren: () => import('./homepage/homepage.module').then((m) => m.HomepageModule),
+    // loadChildren: () => import('./post/post-create/post-create.module').then((m) => m.PostCreateModule),
+    loadChildren: () => import('./post/post-list/post-list.module').then((m) => m.PostListModule),
   },
   {
     path: '**',

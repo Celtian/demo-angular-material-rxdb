@@ -1,0 +1,50 @@
+<table mat-table [fixedLayout]="true" [dataSource]="data" [trackBy]="trackByPostId">
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef>{{ 'table.posts.id.title' | translate }}</th>
+    <td mat-cell *matCellDef="let row">
+      {{ '#' + row.id }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="title">
+    <th mat-header-cell *matHeaderCellDef>{{ 'table.posts.title.title' | translate }}</th>
+    <td mat-cell *matCellDef="let row">
+      {{ row.title }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef>&nbsp;</th>
+    <td mat-cell *matCellDef="let row">
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <a mat-menu-item [routerLink]="['/' | localize, row.id]">
+          <mat-icon>info</mat-icon>
+          <span>{{ 'UNI.detail' | translate }}</span>
+        </a>
+        <!--
+        <a mat-menu-item [routerLink]="['/' + row.id + '/' + ROUTES.POSTS.EDIT | localize]">
+          <mat-icon>edit</mat-icon>
+          <span>{{ 'UNI.edit' | translate }}</span>
+        </a>
+        -->
+        <button mat-menu-item (click)="onDelete(row)">
+          <mat-icon>delete</mat-icon>
+          <span>{{ 'UNI.delete' | translate }}</span>
+        </button>
+      </mat-menu>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
+
+<mat-paginator
+  [pageSizeOptions]="pageSizeOptions"
+  [length]="totalCount"
+  (page)="onPageChange($event)"
+  aria-label="Select page of posts"
+></mat-paginator>
