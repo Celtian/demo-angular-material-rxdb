@@ -54,7 +54,7 @@ export class SeoService {
       this.doc.head.appendChild(linkEl);
     }
     // const href = `${environment.domain}${url}`;
-    const href = `https://celtian.github.io/demo-angular-material-crud${url}`;
+    const href = `https://celtian.github.io/demo-angular-rxdb${url}`;
     linkEl.setAttribute('href', href);
     this.meta.updateTag({ property: 'og:url', content: href });
   }
