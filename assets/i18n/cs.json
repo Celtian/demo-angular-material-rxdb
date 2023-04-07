@@ -1,0 +1,145 @@
+{
+  "BREADCRUMBS": {
+    "app": {
+      "posts": "Příspěvky"
+    },
+    "posts": {
+      "create": "Vytvořit",
+      "edit": "Upravit"
+    }
+  },
+  "ERROR": {
+    "post-was-not-found": "Příspěvek nebyl nalezen",
+    "unexpected-exception": "Neočekávaná chyba"
+  },
+  "ROUTES": {
+    "app": {
+      "not-found": "nenalezeno",
+      "posts": "prispevky"
+    },
+    "posts": {
+      "create": "vytvorit",
+      "detail": "detail",
+      "edit": "upravit"
+    }
+  },
+  "SEO": {
+    "app": {
+      "not-found": {
+        "description": "Tato stránka nebyla nalezena",
+        "title": "Stránka nebyla nalezena"
+      },
+      "posts": {
+        "description": "Seznam příspěvků",
+        "title": "Seznam příspěvků"
+      }
+    },
+    "posts": {
+      "create": {
+        "description": "Vytvořit příspěvek",
+        "title": "Vytvořit příspěvek"
+      },
+      "detail": {
+        "description": "Detail příspěvku",
+        "title": "Detail příspěvku"
+      },
+      "edit": {
+        "description": "Upravit příspěvek",
+        "title": "Upravit příspěvek"
+      }
+    }
+  },
+  "TITLES": {
+    "app": {
+      "not-found": "Stránka nebyla nalezena",
+      "posts": "Seznam příspěvků"
+    },
+    "posts": {
+      "create": "Vytvořit příspěvek",
+      "detail": "Detail příspěvku",
+      "edit": "Upravit příspěvek"
+    }
+  },
+  "UNI": {
+    "clear": "Vymazat",
+    "clear-filters": "Vymazat filtry",
+    "close": "Zavřít",
+    "create": "Vytvořit",
+    "delete": "Smazat",
+    "detail": "Detail",
+    "edit": "Upravit",
+    "no": "Ne",
+    "reset": "Resetovat",
+    "submit": "Potvrdit",
+    "yes": "Ano"
+  },
+  "custom-confirm-dialog": {
+    "default": {
+      "content": "Opravdu chcete potvrdit operaci?",
+      "title": "Potvrzení operace"
+    },
+    "delete-post": {
+      "content": "Opravdu chcete smazat příspěvek?",
+      "title": "Mazání příspěvku"
+    },
+    "unsaved-work": {
+      "content": "Opravdu chcete opustit tuto stránku?",
+      "title": "Neuložená práce"
+    }
+  },
+  "form": {
+    "post": {
+      "body": {
+        "label": "Obsah",
+        "placeholder": "Napiště něco zde…"
+      },
+      "title": {
+        "label": "Název"
+      }
+    }
+  },
+  "input": {
+    "search": {
+      "label": "Vyhledávání",
+      "placeholder": "Začněte zde psát…"
+    }
+  },
+  "mat-paginator": {
+    "first-page": "První stránka",
+    "items-per-page": "Položek na stránku",
+    "last-page": "Poslední stránka",
+    "next-page": "Další stránka",
+    "of": "z",
+    "previous-page": "Předchozí stránka"
+  },
+  "not-found": {
+    "content": "Stránka nebyla nalezena"
+  },
+  "post-detail": {
+    "about-post": "Obsah příspěvku"
+  },
+  "response": {
+    "create": {
+      "failed": "Vytváření se nezdařilo",
+      "success": "Úspěšně vytvořeno"
+    },
+    "delete": {
+      "failed": "Mazání se nezdařilo",
+      "success": "Úspěšně smazáno"
+    },
+    "update": {
+      "failed": "Ukládání se nezdařilo",
+      "success": "Úspěšně uloženo"
+    }
+  },
+  "table": {
+    "posts": {
+      "id": {
+        "title": "ID"
+      },
+      "title": {
+        "title": "Název"
+      }
+    }
+  }
+}
