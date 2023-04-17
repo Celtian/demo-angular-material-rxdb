@@ -35,6 +35,12 @@
   [trackBy]="trackByPostId"
   (matSortChange)="onSortChange($event)"
 >
+  <colgroup>
+    <col width="120" />
+    <col width="auto" />
+    <col width="50" />
+  </colgroup>
+
   <ng-container matColumnDef="id">
     <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>{{ 'table.posts.id.title' | translate }}</th>
     <td mat-cell *matCellDef="let row">
