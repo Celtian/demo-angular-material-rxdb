@@ -1,5 +1,5 @@
 import { isEqual } from 'lodash-es';
-import { DEFAULT_DATASOURCE_STATE } from '../constants/data-source.constants';
+import { DEFAULT_DATASOURCE_STATE } from '../constants/data-source.constant';
 import { DataSourceState } from '../dto/data-source.dto';
 
 export class DataSource<T> {
