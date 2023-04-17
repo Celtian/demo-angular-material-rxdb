@@ -7398,6 +7398,13 @@ ngx-devkit-builders@^0.0.7:
     "@angular-devkit/architect" "^0.1502.4"
     "@angular-devkit/core" "^15.2.4"
 
+ngx-translate-version@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/ngx-translate-version/-/ngx-translate-version-0.0.2.tgz#12fd04e71c2566d22d79eda9e9bf70d25b0c042c"
+  integrity sha512-Hw3k688YD1h/VVGRJkcv6p96S9/5odm1Iom3VoWcd+o6Mfq4Vd6Xp8JWTm8QA9VFe0IQzT6S4vbjucMpzGQpsg==
+  dependencies:
+    tslib "^2.3.0"
+
 nice-napi@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/nice-napi/-/nice-napi-1.0.2.tgz#dc0ab5a1eac20ce548802fc5686eaa6bc654927b"

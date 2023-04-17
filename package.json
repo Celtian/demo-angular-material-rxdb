@@ -40,6 +40,7 @@
     "@ngx-translate/http-loader": "^7.0.0",
     "lodash-es": "^4.17.21",
     "ngx-app-version": "^0.0.4",
+    "ngx-translate-version": "^0.0.2",
     "rxdb": "^14.6.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
