@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { LocalizeRouterService } from '@gilsdav/ngx-translate-router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { TranslateService } from '@ngx-translate/core';
-import { debounceTime, filter, first, switchMap } from 'rxjs';
+import { debounceTime, filter, first, map, switchMap } from 'rxjs';
 import {
   CustomConfirmDialog,
   CustomConfirmDialogService,
@@ -68,6 +68,16 @@ export class PostListComponent implements OnInit, OnDestroy {
         canonical
       );
     });
+
+    this.route.queryParamMap
+      .pipe(
+        first(),
+        map((paramMap) => paramMap.get('query') || '')
+      )
+      .subscribe((query) => {
+        this.query = query;
+        this.cdr.markForCheck();
+      });
 
     this.rxdbProvider.dataBaseReady$
       .pipe(
