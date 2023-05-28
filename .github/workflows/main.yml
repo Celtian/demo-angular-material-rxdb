@@ -14,9 +14,6 @@ jobs:
   install-and-build:
     name: Install, Build & Deploy
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node: [18]
 
     steps:
       - name: Checkout
@@ -25,7 +22,7 @@ jobs:
       - name: Setup node version
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node }}
+          node-version: 18.x
 
       - name: Cache node modules
         uses: actions/cache@v3
