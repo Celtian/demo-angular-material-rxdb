@@ -95,9 +95,6 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 @gilsdav/ngx-translate-router
 MIT
 
-@ngneat/until-destroy
-MIT
-
 @ngx-translate/core
 SEE LICENSE IN LICENSE
 
