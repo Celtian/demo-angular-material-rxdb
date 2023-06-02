@@ -1,10 +1,20 @@
 import { CdkPortal } from '@angular/cdk/portal';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  DestroyRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  inject,
+  signal,
+} from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LocalizeRouterService } from '@gilsdav/ngx-translate-router';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable, delay, filter, first, map, switchMap, tap } from 'rxjs';
 import {
@@ -21,7 +31,6 @@ import { BreadcrumbsPortalService } from 'src/app/shared/services/breadcrumbs-po
 import { LanguageService } from 'src/app/shared/services/language.service';
 import { SeoService } from 'src/app/shared/services/seo.service';
 
-@UntilDestroy()
 @Component({
   selector: 'app-post-edit',
   templateUrl: './post-edit.component.html',
@@ -30,8 +39,8 @@ import { SeoService } from 'src/app/shared/services/seo.service';
 })
 export class PostEditComponent implements OnInit, OnDestroy, CanComponentDeactivate {
   @ViewChild(CdkPortal, { static: true }) public portalContent!: CdkPortal;
-
-  public dataSource = new DataSource<PostDto>(DEFAULT_POST);
+  private destroyRef = inject(DestroyRef);
+  public dataSource = signal(new DataSource<PostDto>(DEFAULT_POST));
   public readonly ROUTES = ROUTES;
 
   public form = this.fb.nonNullable.group({
@@ -60,7 +69,7 @@ export class PostEditComponent implements OnInit, OnDestroy, CanComponentDeactiv
 
   public ngOnInit(): void {
     this.breadcrumbsPortalService.setPortal(this.portalContent);
-    setTimeout(() => this.cdr.markForCheck(), 0);
+    setTimeout(() => this.cdr.markForCheck());
 
     const idFromRoute = this.route.paramMap.pipe(map((paramMap) => paramMap.get('id')));
 
@@ -83,7 +92,7 @@ export class PostEditComponent implements OnInit, OnDestroy, CanComponentDeactiv
             })
           )
         ),
-        untilDestroyed(this)
+        takeUntilDestroyed(this.destroyRef)
       )
       .subscribe();
 
@@ -92,37 +101,33 @@ export class PostEditComponent implements OnInit, OnDestroy, CanComponentDeactiv
         delay(500),
         tap((id) => {
           if (typeof id !== 'string' || !id) {
-            this.dataSource.setData(DEFAULT_POST);
-            this.cdr.markForCheck();
+            this.dataSource.mutate((value) => value.setData(DEFAULT_POST));
           }
         }),
         filter((id) => typeof id === 'string' && !!id),
         switchMap((id) => this.apiService.detail(String(id))),
-        untilDestroyed(this)
+        takeUntilDestroyed(this.destroyRef)
       )
       .subscribe({
         next: (post) => {
-          this.dataSource.setData(post);
+          this.dataSource.mutate((value) => value.setData(post));
           this.form.patchValue(post);
-          this.cdr.markForCheck();
         },
         error: (err) => {
           const error = this.translate.instant('ERROR.unexpected-exception');
-          this.dataSource.setError(error);
-          this.cdr.markForCheck();
+          this.dataSource.mutate((value) => value.setError(error));
         },
       });
   }
 
   public onSubmit(): void {
     this.apiService
-      .patch(this.dataSource.data.id, this.form.value)
+      .patch(this.dataSource().data.id, this.form.value)
       .pipe(first())
       .subscribe({
         next: (post) => {
-          this.dataSource.setData(post);
+          this.dataSource.mutate((value) => value.setData(post));
           this.form.reset(post);
-          this.cdr.markForCheck();
           this.snackBar.open(this.translate.instant('response.update.success'), this.translate.instant('UNI.close'));
         },
         error: () => {
@@ -133,7 +138,7 @@ export class PostEditComponent implements OnInit, OnDestroy, CanComponentDeactiv
 
   public onReset(event: Event): void {
     event.preventDefault();
-    this.form.reset(this.dataSource.data);
+    this.form.reset(this.dataSource().data);
   }
 
   public onDelete(): void {
@@ -142,7 +147,7 @@ export class PostEditComponent implements OnInit, OnDestroy, CanComponentDeactiv
       .pipe(
         first(),
         filter((res) => !!res),
-        switchMap(() => this.apiService.delete(this.dataSource.data.id))
+        switchMap(() => this.apiService.delete(this.dataSource().data.id))
       )
       .subscribe({
         next: () => {

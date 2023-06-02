@@ -27,7 +27,7 @@
 <table
   mat-table
   [fixedLayout]="true"
-  [dataSource]="data"
+  [dataSource]="data()"
   matSort
   matSortActive="id"
   matSortDirection="asc"
@@ -84,7 +84,7 @@
 
 <mat-paginator
   [pageSizeOptions]="pageSizeOptions"
-  [length]="totalCount"
+  [length]="totalCount()"
   (page)="onPageChange($event)"
   aria-label="Select page of posts"
 ></mat-paginator>

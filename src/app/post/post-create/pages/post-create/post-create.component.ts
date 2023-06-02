@@ -1,10 +1,19 @@
 import { CdkPortal } from '@angular/cdk/portal';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  DestroyRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  inject,
+} from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { LocalizeRouterService } from '@gilsdav/ngx-translate-router';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable, first } from 'rxjs';
 import {
@@ -19,7 +28,6 @@ import { BreadcrumbsPortalService } from 'src/app/shared/services/breadcrumbs-po
 import { LanguageService } from 'src/app/shared/services/language.service';
 import { SeoService } from 'src/app/shared/services/seo.service';
 
-@UntilDestroy()
 @Component({
   selector: 'app-post-create',
   templateUrl: './post-create.component.html',
@@ -28,7 +36,7 @@ import { SeoService } from 'src/app/shared/services/seo.service';
 })
 export class PostCreateComponent implements OnDestroy, OnInit, CanComponentDeactivate {
   @ViewChild(CdkPortal, { static: true }) public portalContent!: CdkPortal;
-
+  private destroyRef = inject(DestroyRef);
   public readonly ROUTES = ROUTES;
 
   public form = this.fb.group({
@@ -56,9 +64,9 @@ export class PostCreateComponent implements OnDestroy, OnInit, CanComponentDeact
 
   public ngOnInit(): void {
     this.breadcrumbsPortalService.setPortal(this.portalContent);
-    setTimeout(() => this.cdr.detectChanges(), 0);
+    setTimeout(() => this.cdr.detectChanges());
 
-    this.language.language$.pipe(untilDestroyed(this)).subscribe(() => {
+    this.language.language$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
       const canonical = this.lr.translateRoute(`/${ROUTES.POSTS.CREATE}`) as string;
       this.seoService.setSeo(
         {
@@ -81,7 +89,6 @@ export class PostCreateComponent implements OnDestroy, OnInit, CanComponentDeact
       .subscribe({
         next: (post) => {
           this.form.reset(post);
-          this.cdr.markForCheck();
           this.snackBar.open(this.translate.instant('response.create.success'), this.translate.instant('UNI.close'));
           const translatedRoute = this.lr.translateRoute(`/`);
           this.router.navigate([translatedRoute]);

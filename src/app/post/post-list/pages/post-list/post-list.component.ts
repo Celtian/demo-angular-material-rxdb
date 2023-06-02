@@ -1,9 +1,21 @@
 import { CdkPortal } from '@angular/cdk/portal';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  DestroyRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  inject,
+  signal,
+} from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Sort } from '@angular/material/sort';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LocalizeRouterService } from '@gilsdav/ngx-translate-router';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { TranslateService } from '@ngx-translate/core';
 import { debounceTime, filter, first, map, switchMap } from 'rxjs';
 import {
@@ -18,7 +30,6 @@ import { RxdbProvider } from 'src/app/shared/services/db.service';
 import { LanguageService } from 'src/app/shared/services/language.service';
 import { SeoService } from 'src/app/shared/services/seo.service';
 
-@UntilDestroy()
 @Component({
   selector: 'app-post-list',
   templateUrl: './post-list.component.html',
@@ -27,9 +38,9 @@ import { SeoService } from 'src/app/shared/services/seo.service';
 })
 export class PostListComponent implements OnInit, OnDestroy {
   @ViewChild(CdkPortal, { static: true }) public portalContent!: CdkPortal;
-
-  public data: PostDto[] = [];
-  public totalCount = 0;
+  private destroyRef = inject(DestroyRef);
+  public data = signal<PostDto[]>([]);
+  public totalCount = signal(0);
   public query = '';
 
   public readonly ROUTES = ROUTES;
@@ -58,7 +69,7 @@ export class PostListComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.breadcrumbsPortalService.setPortal(this.portalContent);
 
-    this.language.language$.pipe(untilDestroyed(this)).subscribe(() => {
+    this.language.language$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
       const canonical = this.lr.translateRoute(`/`) as string;
       this.seoService.setSeo(
         {
@@ -84,9 +95,7 @@ export class PostListComponent implements OnInit, OnDestroy {
         filter((ready) => !!ready),
         first()
       )
-      .subscribe(() => {
-        this.bindData();
-      });
+      .subscribe(() => this.bindData());
   }
 
   private bindData(): void {
@@ -103,16 +112,15 @@ export class PostListComponent implements OnInit, OnDestroy {
             params?.['query'] as any
           )
         ),
-        untilDestroyed(this)
+        takeUntilDestroyed(this.destroyRef)
       )
       .subscribe((posts) => {
-        this.data = posts.items;
-        this.totalCount = posts.totalCount;
-        this.cdr.markForCheck();
+        this.data.set(posts.items);
+        this.totalCount.set(posts.totalCount);
       });
   }
 
-  public onPageChange(event: any): void {
+  public onPageChange(event: PageEvent): void {
     this.router.navigate([], {
       queryParams: {
         pageIndex: event.pageIndex > 0 ? event.pageIndex : null,
@@ -137,8 +145,7 @@ export class PostListComponent implements OnInit, OnDestroy {
       )
       .subscribe({
         next: () => {
-          this.data = this.data.filter((i) => i.id !== row.id);
-          this.cdr.markForCheck();
+          this.data.update((value) => value.filter((i) => i.id !== row.id));
           this.snackBar.open(this.translate.instant('response.delete.success'), this.translate.instant('UNI.close'));
         },
         error: () => {
@@ -147,7 +154,7 @@ export class PostListComponent implements OnInit, OnDestroy {
       });
   }
 
-  public onSortChange(event: any): void {
+  public onSortChange(event: Sort): void {
     this.router.navigate([], {
       queryParams: {
         sortBy: event.active,

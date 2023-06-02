@@ -1,6 +1,6 @@
 import { Portal } from '@angular/cdk/portal';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { ChangeDetectionStrategy, Component, DestroyRef, OnInit, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NgxAppVersionDirective } from 'ngx-app-version';
 import { Observable } from 'rxjs';
 import { VERSION } from 'src/environments/version';
@@ -9,7 +9,6 @@ import { BreadcrumbsPortalService } from './shared/services/breadcrumbs-portal.s
 import { RxdbProvider } from './shared/services/db.service';
 import { LanguageService } from './shared/services/language.service';
 
-@UntilDestroy()
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -18,6 +17,7 @@ import { LanguageService } from './shared/services/language.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit {
+  private destroyRef = inject(DestroyRef);
   public endYear = new Date(VERSION.date).getFullYear();
   public breadcrumbsPortal$!: Observable<Portal<any>>;
   public lang = DEFAULT_LANGUAGE;
@@ -33,7 +33,7 @@ export class AppComponent implements OnInit {
   public ngOnInit(): void {
     this.rxdbProvider.initDB('posts-db');
     this.breadcrumbsPortal$ = this.breadcrumbsPortalService.portal$;
-    this.language.language$.pipe(untilDestroyed(this)).subscribe((language) => (this.lang = language));
+    this.language.language$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((language) => (this.lang = language));
   }
 
   public toggleLanguage() {

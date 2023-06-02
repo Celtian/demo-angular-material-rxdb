@@ -1,12 +1,11 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, OnInit, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { LocalizeRouterService } from '@gilsdav/ngx-translate-router';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { TranslateService } from '@ngx-translate/core';
 import { ROUTES } from 'src/app/shared/constants/route.constant';
 import { LanguageService } from 'src/app/shared/services/language.service';
 import { SeoService } from 'src/app/shared/services/seo.service';
 
-@UntilDestroy()
 @Component({
   selector: 'app-not-found',
   templateUrl: './not-found.component.html',
@@ -14,6 +13,8 @@ import { SeoService } from 'src/app/shared/services/seo.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NotFoundComponent implements OnInit {
+  private destroyRef = inject(DestroyRef);
+
   constructor(
     private seoService: SeoService,
     private translate: TranslateService,
@@ -22,7 +23,7 @@ export class NotFoundComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
-    this.language.language$.pipe(untilDestroyed(this)).subscribe(() => {
+    this.language.language$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
       const canonical = this.lr.translateRoute(`/${ROUTES.APP.NOT_FOUND}`) as string;
       this.seoService.setSeo(
         {
