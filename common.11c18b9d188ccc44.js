@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdemo_angular_rxdb=self.webpackChunkdemo_angular_rxdb||[]).push([[592],{1181:(_,t,r)=>{r.d(t,{F:()=>n});var c=r(5879);let n=(()=>{class a{canDeactivate(e){return!e.canDeactivate||e.canDeactivate()}}return a.\u0275fac=function(e){return new(e||a)},a.\u0275prov=c.Yz7({token:a,factory:a.\u0275fac,providedIn:"root"}),a})()}}]);
