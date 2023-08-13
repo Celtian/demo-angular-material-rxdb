@@ -1,5 +1,5 @@
 {
-  "name": "demo-angular-rxdb",
+  "name": "demo-angular-material-rxdb",
   "version": "0.0.0",
   "author": {
     "name": "Dominik Hladík",
@@ -17,7 +17,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "preinstall": "npx only-allow yarn",
-    "postinstall": "ng run demo-angular-rxdb:version",
+    "postinstall": "ng run demo-angular-material-rxdb:version",
     "prepare": "husky install",
     "translations:extract": "ngx-translate-extract --input ./src --output ./src/assets/i18n/*.json --clean --sort --format namespaced-json --marker _ --format-indentation '  ' --string-as-default-value '███'",
     "fix-vulnerabilities": "npx yarn-audit-fix && npx browserslist --update-db"

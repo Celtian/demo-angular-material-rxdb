@@ -12,7 +12,7 @@ on:
 
 jobs:
   install-and-build:
-    name: Install, Build & Deploy
+    name: 🛠️ Install, Build & Deploy
     runs-on: ubuntu-latest
 
     steps:
@@ -47,14 +47,14 @@ jobs:
         run: yarn lint
 
       - name: Build demo app
-        run: yarn build --base-href https://celtian.github.io/demo-angular-rxdb/
+        run: yarn build --base-href https://celtian.github.io/demo-angular-material-rxdb/
 
       - name: Copy index.html to 404.html
-        run: cp ./dist/demo-angular-rxdb/index.html ./dist/demo-angular-rxdb/404.html
+        run: cp ./dist/demo-angular-material-rxdb/index.html ./dist/demo-angular-material-rxdb/404.html
 
       - name: Deploy Github Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
           publish_branch: gh-pages
-          publish_dir: ./dist/demo-angular-rxdb
+          publish_dir: ./dist/demo-angular-material-rxdb

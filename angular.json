@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "demo-angular-rxdb": {
+    "demo-angular-material-rxdb": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -38,7 +38,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/demo-angular-rxdb",
+            "outputPath": "dist/demo-angular-material-rxdb",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -95,10 +95,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "demo-angular-rxdb:build:production"
+              "browserTarget": "demo-angular-material-rxdb:build:production"
             },
             "development": {
-              "browserTarget": "demo-angular-rxdb:build:development"
+              "browserTarget": "demo-angular-material-rxdb:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -106,7 +106,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "demo-angular-rxdb:build"
+            "browserTarget": "demo-angular-material-rxdb:build"
           }
         },
         "test": {
