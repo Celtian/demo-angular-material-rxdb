@@ -50,7 +50,7 @@ export class SeoService {
   }
 
   private setCanonical(url: string): void {
-    let linkEl: HTMLLinkElement = this.doc.querySelector('link[rel=canonical]');
+    let linkEl = this.doc.querySelector('link[rel=canonical]');
     if (!linkEl) {
       linkEl = this.doc.createElement('link');
       linkEl.setAttribute('rel', 'canonical');
@@ -64,7 +64,7 @@ export class SeoService {
 
   private resetCanonical(): void {
     if (this.doc) {
-      const canonical: HTMLLinkElement = this.doc.querySelector('link[rel=canonical]');
+      const canonical = this.doc.querySelector('link[rel=canonical]');
       if (canonical) {
         canonical.remove();
         this.meta.removeTag("name='og:url'");
