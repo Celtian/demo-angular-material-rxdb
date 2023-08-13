@@ -6,6 +6,7 @@ import { getRxStorageDexie } from 'rxdb/plugins/storage-dexie';
 import { RxDBUpdatePlugin } from 'rxdb/plugins/update';
 import { BehaviorSubject } from 'rxjs';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const dbSchema: RxJsonSchema<any> | any = {
   title: 'posts schema',
   version: 0,
@@ -26,7 +27,7 @@ const dbSchema: RxJsonSchema<any> | any = {
   },
 };
 
-async function loadRxDBPlugins(): Promise<any> {
+async function loadRxDBPlugins(): Promise<void> {
   addRxPlugin(RxDBAttachmentsPlugin);
   addRxPlugin(RxDBUpdatePlugin);
 
@@ -48,7 +49,7 @@ export class RxdbProvider {
   public getDatabaseCollection(collectionName: string) {
     if (!this.rxDatabase) {
       throw new Error(
-        'Database is not initialized. Please make sure the database is initialized before getting the collection'
+        'Database is not initialized. Please make sure the database is initialized before getting the collection',
       );
     }
     return this.rxDatabase[collectionName];

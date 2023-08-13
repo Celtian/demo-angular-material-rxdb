@@ -8,9 +8,12 @@ export enum CustomConfirmDialog {
   UnsavedWork,
 }
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class CustomConfirmDialogService {
-  constructor(private confirm: ConfirmDialogService, private translate: TranslateService) {}
+  constructor(
+    private confirm: ConfirmDialogService,
+    private translate: TranslateService,
+  ) {}
 
   public openCustomConfirmDialog(type: CustomConfirmDialog): Observable<boolean> {
     const title = this.getTitle(type);
@@ -43,7 +46,7 @@ export class CustomConfirmDialogService {
   private open(title: string, content: string): Observable<boolean> {
     return this.confirm.open(title, content).pipe(
       first(),
-      map((res) => !!res)
+      map((res) => !!res),
     );
   }
 }

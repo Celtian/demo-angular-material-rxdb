@@ -21,7 +21,7 @@
 <div class="flex items-end justify-end gap-2">
   <button mat-button (click)="onClear()">{{ 'UNI.clear-filters' | translate }}</button>
 
-  <a mat-button [routerLink]="['/' + ROUTES.POSTS.CREATE | localize]">{{ 'UNI.create' | translate }}</a>
+  <a mat-button [routerLink]="['/' + ROUTE_DEFINITION.POSTS.CREATE | localize]">{{ 'UNI.create' | translate }}</a>
 </div>
 
 <table
@@ -66,7 +66,7 @@
           <mat-icon>info</mat-icon>
           <span>{{ 'UNI.detail' | translate }}</span>
         </a>
-        <a mat-menu-item [routerLink]="['/' + row.id + '/' + ROUTES.POSTS.EDIT | localize]">
+        <a mat-menu-item [routerLink]="['/' + row.id + '/' + ROUTE_DEFINITION.POSTS.EDIT | localize]">
           <mat-icon>edit</mat-icon>
           <span>{{ 'UNI.edit' | translate }}</span>
         </a>

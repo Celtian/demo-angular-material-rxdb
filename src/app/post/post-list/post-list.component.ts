@@ -1,4 +1,5 @@
-import { CdkPortal } from '@angular/cdk/portal';
+import { CdkPortal, PortalModule } from '@angular/cdk/portal';
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -11,30 +12,55 @@ import {
   signal,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { PageEvent } from '@angular/material/paginator';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Sort } from '@angular/material/sort';
-import { ActivatedRoute, Router } from '@angular/router';
-import { LocalizeRouterService } from '@gilsdav/ngx-translate-router';
-import { TranslateService } from '@ngx-translate/core';
+import { MatSortModule, Sort } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { LocalizeRouterModule, LocalizeRouterService } from '@gilsdav/ngx-translate-router';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { debounceTime, filter, first, map, switchMap } from 'rxjs';
-import {
-  CustomConfirmDialog,
-  CustomConfirmDialogService,
-} from 'src/app/confirm-dialog/services/custom-confirm-dialog.service';
-import { ROUTES } from 'src/app/shared/constants/route.constant';
+import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
+import { ROUTE_DEFINITION } from 'src/app/shared/constants/route-definition.constant';
 import { PostDto } from 'src/app/shared/dto/post.dto';
 import { ApiService } from 'src/app/shared/services/api.service';
 import { BreadcrumbsPortalService } from 'src/app/shared/services/breadcrumbs-portal.service';
+import { CustomConfirmDialog, CustomConfirmDialogService } from 'src/app/shared/services/custom-confirm-dialog.service';
 import { RxdbProvider } from 'src/app/shared/services/db.service';
 import { LanguageService } from 'src/app/shared/services/language.service';
 import { SeoService } from 'src/app/shared/services/seo.service';
 
 @Component({
+  standalone: true,
   selector: 'app-post-list',
   templateUrl: './post-list.component.html',
   styleUrls: ['./post-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [
+    CommonModule,
+    RouterModule,
+    LocalizeRouterModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatMenuModule,
+    MatIconModule,
+    MatButtonModule,
+    MatTooltipModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    TranslateModule,
+    PortalModule,
+    ConfirmDialogComponent,
+  ],
 })
 export class PostListComponent implements OnInit, OnDestroy {
   @ViewChild(CdkPortal, { static: true }) public portalContent!: CdkPortal;
@@ -43,7 +69,7 @@ export class PostListComponent implements OnInit, OnDestroy {
   public totalCount = signal(0);
   public query = '';
 
-  public readonly ROUTES = ROUTES;
+  public readonly ROUTE_DEFINITION = ROUTE_DEFINITION;
   public readonly displayedColumns: string[] = ['id', 'title', 'actions'];
   public readonly pageSizeOptions = [5, 10, 25, 100];
 
@@ -59,7 +85,7 @@ export class PostListComponent implements OnInit, OnDestroy {
     private language: LanguageService,
     private lr: LocalizeRouterService,
     private confirm: CustomConfirmDialogService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
   ) {}
 
   public ngOnDestroy(): void {
@@ -73,17 +99,17 @@ export class PostListComponent implements OnInit, OnDestroy {
       const canonical = this.lr.translateRoute(`/`) as string;
       this.seoService.setSeo(
         {
-          title: this.translate.instant(`SEO.${ROUTES.APP.POSTS}.title`),
-          description: this.translate.instant(`SEO.${ROUTES.APP.POSTS}.description`),
+          title: this.translate.instant(`SEO.${ROUTE_DEFINITION.APP.POSTS}.title`),
+          description: this.translate.instant(`SEO.${ROUTE_DEFINITION.APP.POSTS}.description`),
         },
-        canonical
+        canonical,
       );
     });
 
     this.route.queryParamMap
       .pipe(
         first(),
-        map((paramMap) => paramMap.get('query') || '')
+        map((paramMap) => paramMap.get('query') || ''),
       )
       .subscribe((query) => {
         this.query = query;
@@ -93,7 +119,7 @@ export class PostListComponent implements OnInit, OnDestroy {
     this.rxdbProvider.dataBaseReady$
       .pipe(
         filter((ready) => !!ready),
-        first()
+        first(),
       )
       .subscribe(() => this.bindData());
   }
@@ -107,12 +133,12 @@ export class PostListComponent implements OnInit, OnDestroy {
             // TODO move to coerce utils
             Number.isNaN(Number(params?.['pageIndex'])) ? 1 : Number(params?.['pageIndex']),
             Number.isNaN(Number(params?.['pageSize'])) ? 5 : Number(params?.['pageSize']),
-            params?.['sortBy'] as any,
-            params?.['sortDirection'] as any,
-            params?.['query'] as any
-          )
+            params?.['sortBy'] as keyof PostDto | undefined,
+            params?.['sortDirection'] as 'asc' | 'desc' | undefined,
+            params?.['query'] as string,
+          ),
         ),
-        takeUntilDestroyed(this.destroyRef)
+        takeUntilDestroyed(this.destroyRef),
       )
       .subscribe((posts) => {
         this.data.set(posts.items);
@@ -141,7 +167,7 @@ export class PostListComponent implements OnInit, OnDestroy {
       .pipe(
         first(),
         filter((res) => !!res),
-        switchMap(() => this.apiService.delete(row.id))
+        switchMap(() => this.apiService.delete(row.id)),
       )
       .subscribe({
         next: () => {
@@ -166,8 +192,8 @@ export class PostListComponent implements OnInit, OnDestroy {
     });
   }
 
-  public onQueryChange(event: any): void {
-    const query = event.target.value;
+  public onQueryChange(event: Event): void {
+    const query = (event.target as HTMLInputElement).value;
     this.router.navigate([], {
       queryParams: {
         query: query ? encodeURIComponent(query) : null,

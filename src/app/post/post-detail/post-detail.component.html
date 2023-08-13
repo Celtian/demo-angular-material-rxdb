@@ -1,9 +1,12 @@
 <ng-container *ngIf="dataSource().state === 'data' || dataSource().state === 'loading'">
   <div *ngIf="dataSource().state === 'data'" class="flex items-end justify-end gap-2">
     <button mat-button color="accent" (click)="onDelete()">{{ 'UNI.delete' | translate }}</button>
-    <a mat-button color="primary" [routerLink]="['/' + dataSource().data.id + '/' + ROUTES.POSTS.EDIT | localize]">{{
-      'UNI.edit' | translate
-    }}</a>
+    <a
+      mat-button
+      color="primary"
+      [routerLink]="['/' + dataSource().data.id + '/' + ROUTE_DEFINITION.POSTS.EDIT | localize]"
+      >{{ 'UNI.edit' | translate }}</a
+    >
   </div>
   <mat-card>
     <mat-card-header>

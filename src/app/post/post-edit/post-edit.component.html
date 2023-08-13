@@ -75,7 +75,11 @@
     <mat-icon aria-hidden="false" aria-label="Arrow icon" fontIcon="chevron_right"></mat-icon>
     <a mat-button color="primary" [routerLink]="['/' | localize, dataSource().data.id]">{{ dataSource().data.id }}</a>
     <mat-icon aria-hidden="false" aria-label="Arrow icon" fontIcon="chevron_right"></mat-icon>
-    <a mat-button color="primary" [routerLink]="['/' + dataSource().data.id + '/' + ROUTES.POSTS.EDIT | localize]">
+    <a
+      mat-button
+      color="primary"
+      [routerLink]="['/' + dataSource().data.id + '/' + ROUTE_DEFINITION.POSTS.EDIT | localize]"
+    >
       {{ 'BREADCRUMBS.posts.edit' | translate }}</a
     >
   </ng-container>

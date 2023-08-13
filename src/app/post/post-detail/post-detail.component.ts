@@ -1,4 +1,5 @@
-import { CdkPortal } from '@angular/cdk/portal';
+import { CdkPortal, PortalModule } from '@angular/cdk/portal';
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -11,61 +12,62 @@ import {
   signal,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FormBuilder, Validators } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute, Router } from '@angular/router';
-import { LocalizeRouterService } from '@gilsdav/ngx-translate-router';
-import { TranslateService } from '@ngx-translate/core';
-import { Observable, delay, filter, first, map, switchMap, tap } from 'rxjs';
-import {
-  CustomConfirmDialog,
-  CustomConfirmDialogService,
-} from 'src/app/confirm-dialog/services/custom-confirm-dialog.service';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { LocalizeRouterModule, LocalizeRouterService } from '@gilsdav/ngx-translate-router';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { delay, filter, first, map, switchMap, tap } from 'rxjs';
 import { DataSource } from 'src/app/shared/classes/data-source';
+import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
 import { DEFAULT_POST } from 'src/app/shared/constants/post.constant';
-import { ROUTES } from 'src/app/shared/constants/route.constant';
+import { ROUTE_DEFINITION } from 'src/app/shared/constants/route-definition.constant';
 import { PostDto } from 'src/app/shared/dto/post.dto';
-import { CanComponentDeactivate } from 'src/app/shared/guards/can-deactivate-guard.service';
 import { ApiService } from 'src/app/shared/services/api.service';
 import { BreadcrumbsPortalService } from 'src/app/shared/services/breadcrumbs-portal.service';
+import { CustomConfirmDialog, CustomConfirmDialogService } from 'src/app/shared/services/custom-confirm-dialog.service';
 import { LanguageService } from 'src/app/shared/services/language.service';
 import { SeoService } from 'src/app/shared/services/seo.service';
 
 @Component({
-  selector: 'app-post-edit',
-  templateUrl: './post-edit.component.html',
-  styleUrls: ['./post-edit.component.scss'],
+  standalone: true,
+  selector: 'app-post-detail',
+  templateUrl: './post-detail.component.html',
+  styleUrls: ['./post-detail.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [
+    CommonModule,
+    RouterModule,
+    LocalizeRouterModule,
+    PortalModule,
+    MatButtonModule,
+    MatIconModule,
+    MatCardModule,
+    TranslateModule,
+    ConfirmDialogComponent,
+  ],
 })
-export class PostEditComponent implements OnInit, OnDestroy, CanComponentDeactivate {
+export class PostDetailComponent implements OnInit, OnDestroy {
   @ViewChild(CdkPortal, { static: true }) public portalContent!: CdkPortal;
   private destroyRef = inject(DestroyRef);
   public dataSource = signal(new DataSource<PostDto>(DEFAULT_POST));
-  public readonly ROUTES = ROUTES;
-
-  public form = this.fb.nonNullable.group({
-    title: ['', [Validators.required, Validators.min(3)]],
-    body: ['', [Validators.required, Validators.min(3)]],
-  });
+  public readonly ROUTE_DEFINITION = ROUTE_DEFINITION;
 
   constructor(
     private breadcrumbsPortalService: BreadcrumbsPortalService,
     private route: ActivatedRoute,
+    private cdr: ChangeDetectorRef,
     private language: LanguageService,
     private seoService: SeoService,
     private translate: TranslateService,
     private lr: LocalizeRouterService,
-    private cdr: ChangeDetectorRef,
-    private fb: FormBuilder,
     private apiService: ApiService<PostDto>,
-    private confirm: CustomConfirmDialogService,
+    private snackBar: MatSnackBar,
     private router: Router,
-    private snackBar: MatSnackBar
+    private confirm: CustomConfirmDialogService,
   ) {}
-
-  public canDeactivate(): boolean | Observable<boolean> {
-    return this.form.pristine || this.confirm.openCustomConfirmDialog(CustomConfirmDialog.UnsavedWork);
-  }
 
   public ngOnInit(): void {
     this.breadcrumbsPortalService.setPortal(this.portalContent);
@@ -80,19 +82,19 @@ export class PostEditComponent implements OnInit, OnDestroy, CanComponentDeactiv
           this.language.language$.pipe(
             tap({
               next: () => {
-                const canonical = this.lr.translateRoute(`/${id}/${ROUTES.POSTS.EDIT}`) as string;
+                const canonical = this.lr.translateRoute(`/${id}`) as string;
                 this.seoService.setSeo(
                   {
-                    title: this.translate.instant(`SEO.${ROUTES.POSTS.EDIT}.title`),
-                    description: this.translate.instant(`SEO.${ROUTES.POSTS.EDIT}.description`),
+                    title: this.translate.instant(`SEO.${ROUTE_DEFINITION.POSTS.DETAIL}.title`),
+                    description: this.translate.instant(`SEO.${ROUTE_DEFINITION.POSTS.DETAIL}.description`),
                   },
-                  canonical
+                  canonical,
                 );
               },
-            })
-          )
+            }),
+          ),
         ),
-        takeUntilDestroyed(this.destroyRef)
+        takeUntilDestroyed(this.destroyRef),
       )
       .subscribe();
 
@@ -106,39 +108,15 @@ export class PostEditComponent implements OnInit, OnDestroy, CanComponentDeactiv
         }),
         filter((id) => typeof id === 'string' && !!id),
         switchMap((id) => this.apiService.detail(String(id))),
-        takeUntilDestroyed(this.destroyRef)
+        takeUntilDestroyed(this.destroyRef),
       )
       .subscribe({
-        next: (post) => {
-          this.dataSource.mutate((value) => value.setData(post));
-          this.form.patchValue(post);
-        },
-        error: (err) => {
+        next: (post) => this.dataSource.mutate((value) => value.setData(post)),
+        error: () => {
           const error = this.translate.instant('ERROR.unexpected-exception');
           this.dataSource.mutate((value) => value.setError(error));
         },
       });
-  }
-
-  public onSubmit(): void {
-    this.apiService
-      .patch(this.dataSource().data.id, this.form.value)
-      .pipe(first())
-      .subscribe({
-        next: (post) => {
-          this.dataSource.mutate((value) => value.setData(post));
-          this.form.reset(post);
-          this.snackBar.open(this.translate.instant('response.update.success'), this.translate.instant('UNI.close'));
-        },
-        error: () => {
-          this.snackBar.open(this.translate.instant('response.update.failed'), this.translate.instant('UNI.close'));
-        },
-      });
-  }
-
-  public onReset(event: Event): void {
-    event.preventDefault();
-    this.form.reset(this.dataSource().data);
   }
 
   public onDelete(): void {
@@ -147,7 +125,7 @@ export class PostEditComponent implements OnInit, OnDestroy, CanComponentDeactiv
       .pipe(
         first(),
         filter((res) => !!res),
-        switchMap(() => this.apiService.delete(this.dataSource().data.id))
+        switchMap(() => this.apiService.delete(this.dataSource().data.id)),
       )
       .subscribe({
         next: () => {

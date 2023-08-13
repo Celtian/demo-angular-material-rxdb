@@ -14,10 +14,10 @@ export class LanguageService {
   private languageSubject = new BehaviorSubject<Language>(DEFAULT_LANGUAGE);
 
   constructor(
-    @Inject(DOCUMENT) private doc: any,
+    @Inject(DOCUMENT) private doc: Document,
     private lr: LocalizeRouterService,
     private translate: TranslateService,
-    private meta: Meta
+    private meta: Meta,
   ) {}
 
   public initLang(): void {
@@ -52,7 +52,7 @@ export class LanguageService {
       AVAILABLE_LANGUAGES.filter((lang) => lang !== language).map((lang) => ({
         property: 'og:locale:alternate',
         content: this.formatLang(lang),
-      }))
+      })),
     );
   }
 
