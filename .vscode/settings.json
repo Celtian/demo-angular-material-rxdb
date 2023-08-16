@@ -12,10 +12,16 @@
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "[scss]": {
+    "editor.defaultFormatter": "stylelint.vscode-stylelint"
+  },
   "typescript.updateImportsOnFileMove.enabled": "always",
   "files.eol": "\r\n",
   "files.encoding": "utf8",
   "prettier.endOfLine": "lf",
   "javascript.implicitProjectConfig.experimentalDecorators": true,
   "prettier.prettierPath": "./node_modules/prettier",
+  "css.validate": false,
+  "less.validate": false,
+  "scss.validate": false
 }

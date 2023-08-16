@@ -1,0 +1,29 @@
+{
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-tailwindcss",
+    "stylelint-config-standard-scss",
+    "stylelint-config-prettier"
+  ],
+  "rules": {
+    "no-empty-source": null,
+    "no-invalid-position-at-import-rule": [
+      true,
+      {
+        "ignoreAtRules": ["tailwind"]
+      }
+    ],
+    "selector-pseudo-element-no-unknown": [
+      true,
+      {
+        "ignorePseudoElements": ["ng-deep"]
+      }
+    ],
+    "scss/at-rule-no-unknown": [
+      true,
+      {
+        "ignoreAtRules": ["tailwind"]
+      }
+    ]
+  }
+}
