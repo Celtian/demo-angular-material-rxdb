@@ -1,5 +1,4 @@
 import { CdkPortal, PortalModule } from '@angular/cdk/portal';
-import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -9,7 +8,6 @@ import {
   OnInit,
   ViewChild,
   inject,
-  signal,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -19,7 +17,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { LocalizeRouterModule, LocalizeRouterService } from '@gilsdav/ngx-translate-router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Observable, delay, filter, first, map, switchMap, tap } from 'rxjs';
@@ -39,11 +37,10 @@ import { SeoService } from 'src/app/shared/services/seo.service';
   standalone: true,
   selector: 'app-post-edit',
   templateUrl: './post-edit.component.html',
-  styleUrls: ['./post-edit.component.scss'],
+  styleUrl: './post-edit.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
-    CommonModule,
-    RouterModule,
+    RouterLink,
     LocalizeRouterModule,
     ReactiveFormsModule,
     MatIconModule,
@@ -59,7 +56,7 @@ import { SeoService } from 'src/app/shared/services/seo.service';
 export class PostEditComponent implements OnInit, OnDestroy, CanComponentDeactivate {
   @ViewChild(CdkPortal, { static: true }) public portalContent!: CdkPortal;
   private destroyRef = inject(DestroyRef);
-  public dataSource = signal(new DataSource<PostDto>(DEFAULT_POST));
+  public dataSource = new DataSource<PostDto>(DEFAULT_POST);
   public readonly ROUTE_DEFINITION = ROUTE_DEFINITION;
 
   public form = this.fb.nonNullable.group({
@@ -120,7 +117,7 @@ export class PostEditComponent implements OnInit, OnDestroy, CanComponentDeactiv
         delay(500),
         tap((id) => {
           if (typeof id !== 'string' || !id) {
-            this.dataSource.mutate((value) => value.setData(DEFAULT_POST));
+            this.dataSource.setData(DEFAULT_POST);
           }
         }),
         filter((id) => typeof id === 'string' && !!id),
@@ -129,23 +126,23 @@ export class PostEditComponent implements OnInit, OnDestroy, CanComponentDeactiv
       )
       .subscribe({
         next: (post) => {
-          this.dataSource.mutate((value) => value.setData(post));
+          this.dataSource.setData(post);
           this.form.patchValue(post);
         },
         error: () => {
           const error = this.translate.instant('ERROR.unexpected-exception');
-          this.dataSource.mutate((value) => value.setError(error));
+          this.dataSource.setError(error);
         },
       });
   }
 
   public onSubmit(): void {
     this.apiService
-      .patch(this.dataSource().data.id, this.form.value)
+      .patch(this.dataSource.data().id, this.form.value)
       .pipe(first())
       .subscribe({
         next: (post) => {
-          this.dataSource.mutate((value) => value.setData(post));
+          this.dataSource.setData(post);
           this.form.reset(post);
           this.snackBar.open(this.translate.instant('response.update.success'), this.translate.instant('UNI.close'));
         },
@@ -157,7 +154,7 @@ export class PostEditComponent implements OnInit, OnDestroy, CanComponentDeactiv
 
   public onReset(event: Event): void {
     event.preventDefault();
-    this.form.reset(this.dataSource().data);
+    this.form.reset(this.dataSource.data());
   }
 
   public onDelete(): void {
@@ -166,7 +163,7 @@ export class PostEditComponent implements OnInit, OnDestroy, CanComponentDeactiv
       .pipe(
         first(),
         filter((res) => !!res),
-        switchMap(() => this.apiService.delete(this.dataSource().data.id)),
+        switchMap(() => this.apiService.delete(this.dataSource.data().id)),
       )
       .subscribe({
         next: () => {

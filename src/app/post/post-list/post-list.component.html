@@ -6,16 +6,17 @@
     [placeholder]="'input.search.placeholder' | translate"
     [(ngModel)]="query"
   />
-  <button
-    *ngIf="query"
-    matSuffix
-    mat-icon-button
-    [attr.aria-label]="'UNI.clear' | translate"
-    (click)="onQueryRemove()"
-    [matTooltip]="'UNI.clear' | translate"
-  >
-    <mat-icon>close</mat-icon>
-  </button>
+  @if (query) {
+    <button
+      matSuffix
+      mat-icon-button
+      [attr.aria-label]="'UNI.clear' | translate"
+      (click)="onQueryRemove()"
+      [matTooltip]="'UNI.clear' | translate"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  }
 </mat-form-field>
 
 <div class="flex items-end justify-end gap-2">

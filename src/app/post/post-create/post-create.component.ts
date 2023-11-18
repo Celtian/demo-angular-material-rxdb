@@ -1,5 +1,4 @@
 import { CdkPortal, PortalModule } from '@angular/cdk/portal';
-import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -18,7 +17,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { Router, RouterModule } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { LocalizeRouterModule, LocalizeRouterService } from '@gilsdav/ngx-translate-router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Observable, first } from 'rxjs';
@@ -36,10 +35,9 @@ import { SeoService } from 'src/app/shared/services/seo.service';
   standalone: true,
   selector: 'app-post-create',
   templateUrl: './post-create.component.html',
-  styleUrls: ['./post-create.component.scss'],
+  styleUrl: './post-create.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
-    CommonModule,
     ReactiveFormsModule,
     MatCardModule,
     MatIconModule,
@@ -49,7 +47,7 @@ import { SeoService } from 'src/app/shared/services/seo.service';
     PortalModule,
     TranslateModule,
     ConfirmDialogComponent,
-    RouterModule,
+    RouterLink,
     LocalizeRouterModule,
   ],
 })

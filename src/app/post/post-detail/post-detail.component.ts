@@ -1,5 +1,5 @@
 import { CdkPortal, PortalModule } from '@angular/cdk/portal';
-import { CommonModule } from '@angular/common';
+import { UpperCasePipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -9,14 +9,13 @@ import {
   OnInit,
   ViewChild,
   inject,
-  signal,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { LocalizeRouterModule, LocalizeRouterService } from '@gilsdav/ngx-translate-router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { delay, filter, first, map, switchMap, tap } from 'rxjs';
@@ -35,11 +34,11 @@ import { SeoService } from 'src/app/shared/services/seo.service';
   standalone: true,
   selector: 'app-post-detail',
   templateUrl: './post-detail.component.html',
-  styleUrls: ['./post-detail.component.scss'],
+  styleUrl: './post-detail.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
-    CommonModule,
-    RouterModule,
+    UpperCasePipe,
+    RouterLink,
     LocalizeRouterModule,
     PortalModule,
     MatButtonModule,
@@ -52,7 +51,7 @@ import { SeoService } from 'src/app/shared/services/seo.service';
 export class PostDetailComponent implements OnInit, OnDestroy {
   @ViewChild(CdkPortal, { static: true }) public portalContent!: CdkPortal;
   private destroyRef = inject(DestroyRef);
-  public dataSource = signal(new DataSource<PostDto>(DEFAULT_POST));
+  public dataSource = new DataSource<PostDto>(DEFAULT_POST);
   public readonly ROUTE_DEFINITION = ROUTE_DEFINITION;
 
   constructor(
@@ -103,7 +102,7 @@ export class PostDetailComponent implements OnInit, OnDestroy {
         delay(500),
         tap((id) => {
           if (typeof id !== 'string' || !id) {
-            this.dataSource.mutate((value) => value.setData(DEFAULT_POST));
+            this.dataSource.setData(DEFAULT_POST);
           }
         }),
         filter((id) => typeof id === 'string' && !!id),
@@ -111,10 +110,10 @@ export class PostDetailComponent implements OnInit, OnDestroy {
         takeUntilDestroyed(this.destroyRef),
       )
       .subscribe({
-        next: (post) => this.dataSource.mutate((value) => value.setData(post)),
+        next: (post) => this.dataSource.setData(post),
         error: () => {
           const error = this.translate.instant('ERROR.unexpected-exception');
-          this.dataSource.mutate((value) => value.setError(error));
+          this.dataSource.setError(error);
         },
       });
   }
@@ -125,7 +124,7 @@ export class PostDetailComponent implements OnInit, OnDestroy {
       .pipe(
         first(),
         filter((res) => !!res),
-        switchMap(() => this.apiService.delete(this.dataSource().data.id)),
+        switchMap(() => this.apiService.delete(this.dataSource.data().id)),
       )
       .subscribe({
         next: () => {

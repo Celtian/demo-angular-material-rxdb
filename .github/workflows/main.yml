@@ -16,15 +16,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: 🗜️ Checkout
         uses: actions/checkout@v3
 
-      - name: Setup node version
+      - name: 🗜️ Setup node version
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 20
 
-      - name: Cache node modules
+      - name: 🛠️ Cache node modules
         id: cache
         uses: actions/cache@v3
         with:
@@ -35,26 +35,26 @@ jobs:
             ${{ runner.OS }}-yarn-
             ${{ runner.OS }}-
 
-      - name: Install
+      - name: 🛠️ Install
         if: steps.cache.outputs.cache-hit != 'true'
         run: yarn install --frozen-lockfile
 
-      - name: Postinstall
+      - name: 🛠️ Postinstall
         if: steps.cache.outputs.cache-hit == 'true'
         run: yarn postinstall
 
-      - name: Lint
+      - name: 🌡️ Lint
         run: yarn lint
 
-      - name: Build demo app
+      - name: 📦 Build demo app
         run: yarn build --base-href https://celtian.github.io/demo-angular-material-rxdb/
 
-      - name: Copy index.html to 404.html
-        run: cp ./dist/demo-angular-material-rxdb/index.html ./dist/demo-angular-material-rxdb/404.html
+      - name: 🛠️ Copy index.html to 404.html
+        run: cp ./dist/demo-angular-material-rxdb/browser/index.html ./dist/demo-angular-material-rxdb/browser/404.html
 
-      - name: Deploy Github Pages
+      - name: 🚀 Deploy Github Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
           publish_branch: gh-pages
-          publish_dir: ./dist/demo-angular-material-rxdb
+          publish_dir: ./dist/demo-angular-material-rxdb/browser

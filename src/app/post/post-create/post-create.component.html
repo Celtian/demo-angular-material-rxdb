@@ -10,31 +10,33 @@
       <mat-form-field class="w-full">
         <mat-label>{{ 'form.post.title.label' | translate }}</mat-label>
         <input matInput type="text" formControlName="title" />
-        <button
-          *ngIf="form.controls.title.value"
-          matSuffix
-          mat-icon-button
-          [attr.aria-label]="'UNI.clear' | translate"
-          (click)="form.controls.title.setValue('')"
-          [matTooltip]="'UNI.clear' | translate"
-        >
-          <mat-icon>close</mat-icon>
-        </button>
+        @if (form.controls.title.value) {
+          <button
+            matSuffix
+            mat-icon-button
+            [attr.aria-label]="'UNI.clear' | translate"
+            (click)="form.controls.title.setValue('')"
+            [matTooltip]="'UNI.clear' | translate"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
+        }
       </mat-form-field>
 
       <mat-form-field class="w-full">
         <mat-label>{{ 'form.post.body.label' | translate }}</mat-label>
         <textarea matInput [placeholder]="'form.post.body.placeholder' | translate" formControlName="body"></textarea>
-        <button
-          *ngIf="form.controls.body.value"
-          matSuffix
-          mat-icon-button
-          [attr.aria-label]="'UNI.clear' | translate"
-          (click)="form.controls.body.setValue('')"
-          [matTooltip]="'UNI.clear' | translate"
-        >
-          <mat-icon>close</mat-icon>
-        </button>
+        @if (form.controls.body.value) {
+          <button
+            matSuffix
+            mat-icon-button
+            [attr.aria-label]="'UNI.clear' | translate"
+            (click)="form.controls.body.setValue('')"
+            [matTooltip]="'UNI.clear' | translate"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
+        }
       </mat-form-field>
 
       <div class="flex justify-center gap-2">

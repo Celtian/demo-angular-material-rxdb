@@ -36,11 +36,11 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": "dist/demo-angular-material-rxdb",
             "index": "src/index.html",
-            "main": "src/main.ts",
+            "browser": "src/main.ts",
             "polyfills": [
               "src/polyfills.ts",
               "zone.js"
@@ -81,9 +81,7 @@
               "outputHashing": "all"
             },
             "development": {
-              "buildOptimizer": false,
               "optimization": false,
-              "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
@@ -95,10 +93,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "demo-angular-material-rxdb:build:production"
+              "buildTarget": "demo-angular-material-rxdb:build:production"
             },
             "development": {
-              "browserTarget": "demo-angular-material-rxdb:build:development"
+              "buildTarget": "demo-angular-material-rxdb:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -106,7 +104,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "demo-angular-material-rxdb:build"
+            "buildTarget": "demo-angular-material-rxdb:build"
           }
         },
         "test": {
