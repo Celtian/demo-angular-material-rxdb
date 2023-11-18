@@ -8,9 +8,60 @@
       "edit": "Edit"
     }
   },
+  "custom-confirm-dialog": {
+    "default": {
+      "content": "Do you want to confirm operation?",
+      "title": "Confirm operation"
+    },
+    "delete-post": {
+      "content": "Do you want to delete post?",
+      "title": "Delete post"
+    },
+    "unsaved-work": {
+      "content": "Do you really want to leave this page?",
+      "title": "Unsaved work"
+    }
+  },
   "ERROR": {
     "post-was-not-found": "Post was not found",
     "unexpected-exception": "Unexpected error"
+  },
+  "form": {
+    "post": {
+      "body": {
+        "label": "Body",
+        "placeholder": "Type something here…"
+      },
+      "title": {
+        "label": "Title"
+      }
+    }
+  },
+  "input": {
+    "search": {
+      "label": "Search",
+      "placeholder": "Type something here…"
+    }
+  },
+  "not-found": {
+    "content": "Page was not found"
+  },
+  "post-detail": {
+    "about-post": "Post content"
+  },
+  "response": {
+    "create": {
+      "failed": "Creation failed",
+      "success": "Successfully created"
+    },
+    "delete": {
+      "failed": "Deletion failed",
+      "success": "Successfully deleted"
+    },
+    "update": {
+      "failed": "Update failed",
+      "success": "Succesfully updated"
+    }
   },
   "ROUTES": {
     "app": {
@@ -49,6 +100,16 @@
       }
     }
   },
+  "table": {
+    "posts": {
+      "id": {
+        "title": "ID"
+      },
+      "title": {
+        "title": "Title"
+      }
+    }
+  },
   "TITLES": {
     "app": {
       "not-found": "Page was not found",
@@ -72,74 +133,5 @@
     "reset": "Reset",
     "submit": "Submit",
     "yes": "Yes"
-  },
-  "custom-confirm-dialog": {
-    "default": {
-      "content": "Do you want to confirm operation?",
-      "title": "Confirm operation"
-    },
-    "delete-post": {
-      "content": "Do you want to delete post?",
-      "title": "Delete post"
-    },
-    "unsaved-work": {
-      "content": "Do you really want to leave this page?",
-      "title": "Unsaved work"
-    }
-  },
-  "form": {
-    "post": {
-      "body": {
-        "label": "Body",
-        "placeholder": "Type something here…"
-      },
-      "title": {
-        "label": "Title"
-      }
-    }
-  },
-  "input": {
-    "search": {
-      "label": "Search",
-      "placeholder": "Type something here…"
-    }
-  },
-  "mat-paginator": {
-    "first-page": "First page",
-    "items-per-page": "Items per page",
-    "last-page": "Last page",
-    "next-page": "Next page",
-    "of": "from",
-    "previous-page": "Previous page"
-  },
-  "not-found": {
-    "content": "Page was not found"
-  },
-  "post-detail": {
-    "about-post": "Post content"
-  },
-  "response": {
-    "create": {
-      "failed": "Creation failed",
-      "success": "Successfully created"
-    },
-    "delete": {
-      "failed": "Deletion failed",
-      "success": "Successfully deleted"
-    },
-    "update": {
-      "failed": "Update failed",
-      "success": "Succesfully updated"
-    }
-  },
-  "table": {
-    "posts": {
-      "id": {
-        "title": "ID"
-      },
-      "title": {
-        "title": "Title"
-      }
-    }
   }
 }
