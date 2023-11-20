@@ -1,4 +1,4 @@
-# Demo Angular RxDB
+# Demo Angular Material RxDB
 
 ## Description
 
