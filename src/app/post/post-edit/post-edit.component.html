@@ -1,7 +1,7 @@
 @if (dataSource.state() === 'loading' || dataSource.state() === 'data') {
   @if (dataSource.state() === 'data') {
     <div class="flex items-end justify-end gap-2">
-      <button mat-button color="accent" (click)="onDelete()">{{ 'UNI.delete' | translate }}</button>
+      <button mat-button color="accent" (click)="onDelete()">{{ 'uni.delete' | translate }}</button>
     </div>
   }
 
@@ -21,9 +21,9 @@
             <button
               matSuffix
               mat-icon-button
-              [attr.aria-label]="'UNI.clear' | translate"
+              [attr.aria-label]="'uni.clear' | translate"
               (click)="form.controls.title.setValue(''); form.controls.body.markAsDirty()"
-              [matTooltip]="'UNI.clear' | translate"
+              [matTooltip]="'uni.clear' | translate"
             >
               <mat-icon>close</mat-icon>
             </button>
@@ -37,9 +37,9 @@
             <button
               matSuffix
               mat-icon-button
-              [attr.aria-label]="'UNI.clear' | translate"
+              [attr.aria-label]="'uni.clear' | translate"
               (click)="form.controls.body.setValue(''); form.controls.body.markAsDirty()"
-              [matTooltip]="'UNI.clear' | translate"
+              [matTooltip]="'uni.clear' | translate"
             >
               <mat-icon>close</mat-icon>
             </button>
@@ -48,10 +48,10 @@
 
         <div class="flex justify-center gap-2">
           <button mat-button color="primary" [disabled]="form.pristine" type="reset">
-            {{ 'UNI.reset' | translate }}
+            {{ 'uni.reset' | translate }}
           </button>
           <button mat-flat-button color="primary" type="submit" [disabled]="form.pristine || form.invalid">
-            {{ 'UNI.submit' | translate }}
+            {{ 'uni.submit' | translate }}
           </button>
         </div>
       </form>
@@ -72,13 +72,13 @@
   <mat-card>
     <mat-card-content class="flex flex-col gap-2 text-center">
       <mat-icon aria-hidden="false" aria-label="Warning icon" fontIcon="warning"></mat-icon>
-      <div>{{ 'ERROR.post-was-not-found' | translate }}</div>
+      <div>{{ 'error.post-was-not-found' | translate }}</div>
     </mat-card-content>
   </mat-card>
 }
 
 <div *cdkPortal class="container flex items-center gap-1 py-4">
-  <a mat-button color="primary" [routerLink]="['/' | localize]">{{ 'BREADCRUMBS.app.posts' | translate }}</a>
+  <a mat-button color="primary" [routerLink]="['/' | localize]">{{ 'breadcrumbs.app.posts' | translate }}</a>
   @if (dataSource.state() === 'data') {
     <mat-icon aria-hidden="false" aria-label="Arrow icon" fontIcon="chevron_right"></mat-icon>
     <a mat-button color="primary" [routerLink]="['/' | localize, dataSource.data().id]">{{ dataSource.data().id }}</a>
@@ -88,7 +88,7 @@
       color="primary"
       [routerLink]="['/' + dataSource.data().id + '/' + ROUTE_DEFINITION.POSTS.EDIT | localize]"
     >
-      {{ 'BREADCRUMBS.posts.edit' | translate }}</a
+      {{ 'breadcrumbs.posts.edit' | translate }}</a
     >
   }
 </div>

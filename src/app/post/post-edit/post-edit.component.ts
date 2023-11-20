@@ -99,8 +99,8 @@ export class PostEditComponent implements OnInit, OnDestroy, CanComponentDeactiv
                 const canonical = this.lr.translateRoute(`/${id}/${ROUTE_DEFINITION.POSTS.EDIT}`) as string;
                 this.seoService.setSeo(
                   {
-                    title: this.translate.instant(`SEO.${ROUTE_DEFINITION.POSTS.EDIT}.title`),
-                    description: this.translate.instant(`SEO.${ROUTE_DEFINITION.POSTS.EDIT}.description`),
+                    title: this.translate.instant(`seo.${ROUTE_DEFINITION.POSTS.EDIT}.title`),
+                    description: this.translate.instant(`seo.${ROUTE_DEFINITION.POSTS.EDIT}.description`),
                   },
                   canonical,
                 );
@@ -130,7 +130,7 @@ export class PostEditComponent implements OnInit, OnDestroy, CanComponentDeactiv
           this.form.patchValue(post);
         },
         error: () => {
-          const error = this.translate.instant('ERROR.unexpected-exception');
+          const error = this.translate.instant('error.unexpected-exception');
           this.dataSource.setError(error);
         },
       });
@@ -144,10 +144,10 @@ export class PostEditComponent implements OnInit, OnDestroy, CanComponentDeactiv
         next: (post) => {
           this.dataSource.setData(post);
           this.form.reset(post);
-          this.snackBar.open(this.translate.instant('response.update.success'), this.translate.instant('UNI.close'));
+          this.snackBar.open(this.translate.instant('response.update.success'), this.translate.instant('uni.close'));
         },
         error: () => {
-          this.snackBar.open(this.translate.instant('response.update.failed'), this.translate.instant('UNI.close'));
+          this.snackBar.open(this.translate.instant('response.update.failed'), this.translate.instant('uni.close'));
         },
       });
   }
@@ -167,12 +167,12 @@ export class PostEditComponent implements OnInit, OnDestroy, CanComponentDeactiv
       )
       .subscribe({
         next: () => {
-          this.snackBar.open(this.translate.instant('response.delete.success'), this.translate.instant('UNI.close'));
+          this.snackBar.open(this.translate.instant('response.delete.success'), this.translate.instant('uni.close'));
           const translatedRoute = this.lr.translateRoute(`/`);
           this.router.navigate([translatedRoute]);
         },
         error: () => {
-          this.snackBar.open(this.translate.instant('response.delete.failed'), this.translate.instant('UNI.close'));
+          this.snackBar.open(this.translate.instant('response.delete.failed'), this.translate.instant('uni.close'));
         },
       });
   }

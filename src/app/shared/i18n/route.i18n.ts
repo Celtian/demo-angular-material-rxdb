@@ -8,45 +8,45 @@ export const ROUTES_I18N: RouteDefinitionDto<{
 }> = {
   APP: {
     POSTS: {
-      route: _('ROUTES.app.posts'),
-      title: _('TITLES.app.posts'),
+      route: _('routes.app.posts'),
+      title: _('titles.app.posts'),
       seo: {
-        title: _('SEO.app.posts.title'),
-        description: _('SEO.app.posts.description'),
+        title: _('seo.app.posts.title'),
+        description: _('seo.app.posts.description'),
       },
     },
     NOT_FOUND: {
-      route: _('ROUTES.app.not-found'),
-      title: _('TITLES.app.not-found'),
+      route: _('routes.app.not-found'),
+      title: _('titles.app.not-found'),
       seo: {
-        title: _('SEO.app.not-found.title'),
-        description: _('SEO.app.not-found.description'),
+        title: _('seo.app.not-found.title'),
+        description: _('seo.app.not-found.description'),
       },
     },
   },
   POSTS: {
     DETAIL: {
-      route: _('ROUTES.posts.detail'),
-      title: _('TITLES.posts.detail'),
+      route: _('routes.posts.detail'),
+      title: _('titles.posts.detail'),
       seo: {
-        title: _('SEO.posts.detail.title'),
-        description: _('SEO.posts.detail.description'),
+        title: _('seo.posts.detail.title'),
+        description: _('seo.posts.detail.description'),
       },
     },
     CREATE: {
-      route: _('ROUTES.posts.create'),
-      title: _('TITLES.posts.create'),
+      route: _('routes.posts.create'),
+      title: _('titles.posts.create'),
       seo: {
-        title: _('SEO.posts.create.title'),
-        description: _('SEO.posts.create.description'),
+        title: _('seo.posts.create.title'),
+        description: _('seo.posts.create.description'),
       },
     },
     EDIT: {
-      route: _('ROUTES.posts.edit'),
-      title: _('TITLES.posts.edit'),
+      route: _('routes.posts.edit'),
+      title: _('titles.posts.edit'),
       seo: {
-        title: _('SEO.posts.edit.title'),
-        description: _('SEO.posts.edit.description'),
+        title: _('seo.posts.edit.title'),
+        description: _('seo.posts.edit.description'),
       },
     },
   },

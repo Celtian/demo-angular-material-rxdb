@@ -1,12 +1,12 @@
 @if (dataSource.state() === 'data' || dataSource.state() === 'loading') {
   @if (dataSource.state() === 'data') {
     <div class="flex items-end justify-end gap-2">
-      <button mat-button color="accent" (click)="onDelete()">{{ 'UNI.delete' | translate }}</button>
+      <button mat-button color="accent" (click)="onDelete()">{{ 'uni.delete' | translate }}</button>
       <a
         mat-button
         color="primary"
         [routerLink]="['/' + dataSource.data().id + '/' + ROUTE_DEFINITION.POSTS.EDIT | localize]"
-        >{{ 'UNI.edit' | translate }}</a
+        >{{ 'uni.edit' | translate }}</a
       >
     </div>
   }
@@ -44,13 +44,13 @@
   <mat-card>
     <mat-card-content class="flex flex-col gap-2 text-center">
       <mat-icon aria-hidden="false" aria-label="Warning icon" fontIcon="warning"></mat-icon>
-      <div>{{ 'ERROR.post-was-not-found' | translate }}</div>
+      <div>{{ 'error.post-was-not-found' | translate }}</div>
     </mat-card-content>
   </mat-card>
 }
 
 <div *cdkPortal class="container flex items-center gap-1 py-4">
-  <a mat-button color="primary" [routerLink]="['/' | localize]">{{ 'BREADCRUMBS.app.posts' | translate }}</a>
+  <a mat-button color="primary" [routerLink]="['/' | localize]">{{ 'breadcrumbs.app.posts' | translate }}</a>
   @if (dataSource.state() === 'data') {
     <mat-icon aria-hidden="false" aria-label="Arrow icon" fontIcon="chevron_right"></mat-icon>
     <a mat-button color="primary" [routerLink]="['/' | localize, dataSource.data().id]">{{ dataSource.data().id }}</a>

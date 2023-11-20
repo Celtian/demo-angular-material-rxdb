@@ -10,9 +10,9 @@
     <button
       matSuffix
       mat-icon-button
-      [attr.aria-label]="'UNI.clear' | translate"
+      [attr.aria-label]="'uni.clear' | translate"
       (click)="onQueryRemove()"
-      [matTooltip]="'UNI.clear' | translate"
+      [matTooltip]="'uni.clear' | translate"
     >
       <mat-icon>close</mat-icon>
     </button>
@@ -20,9 +20,9 @@
 </mat-form-field>
 
 <div class="flex items-end justify-end gap-2">
-  <button mat-button (click)="onClear()">{{ 'UNI.clear-filters' | translate }}</button>
+  <button mat-button (click)="onClear()">{{ 'uni.clear-filters' | translate }}</button>
 
-  <a mat-button [routerLink]="['/' + ROUTE_DEFINITION.POSTS.CREATE | localize]">{{ 'UNI.create' | translate }}</a>
+  <a mat-button [routerLink]="['/' + ROUTE_DEFINITION.POSTS.CREATE | localize]">{{ 'uni.create' | translate }}</a>
 </div>
 
 <table
@@ -65,15 +65,15 @@
       <mat-menu #menu="matMenu">
         <a mat-menu-item [routerLink]="['/' | localize, row.id]">
           <mat-icon>info</mat-icon>
-          <span>{{ 'UNI.detail' | translate }}</span>
+          <span>{{ 'uni.detail' | translate }}</span>
         </a>
         <a mat-menu-item [routerLink]="['/' + row.id + '/' + ROUTE_DEFINITION.POSTS.EDIT | localize]">
           <mat-icon>edit</mat-icon>
-          <span>{{ 'UNI.edit' | translate }}</span>
+          <span>{{ 'uni.edit' | translate }}</span>
         </a>
         <button mat-menu-item (click)="onDelete(row)">
           <mat-icon>delete</mat-icon>
-          <span>{{ 'UNI.delete' | translate }}</span>
+          <span>{{ 'uni.delete' | translate }}</span>
         </button>
       </mat-menu>
     </td>
@@ -91,5 +91,5 @@
 ></mat-paginator>
 
 <div *cdkPortal class="container py-4">
-  <a mat-button color="primary" [routerLink]="['/' | localize]">{{ 'BREADCRUMBS.app.posts' | translate }}</a>
+  <a mat-button color="primary" [routerLink]="['/' | localize]">{{ 'breadcrumbs.app.posts' | translate }}</a>
 </div>

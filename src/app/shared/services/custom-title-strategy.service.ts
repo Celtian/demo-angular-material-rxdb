@@ -9,14 +9,17 @@ import { TranslateService } from '@ngx-translate/core';
 export class CustomTitleStrategyService extends TitleStrategy {
   private readonly siteName = 'RDXB demo';
 
-  constructor(private translateService: TranslateService, private title: Title) {
+  constructor(
+    private translateService: TranslateService,
+    private title: Title,
+  ) {
     super();
   }
 
   public updateTitle(snapshot: RouterStateSnapshot): void {
     const title = this.buildTitle(snapshot);
     if (title) {
-      this.translateService.get(`TITLES.${title}`).subscribe((translatedTitle) => {
+      this.translateService.get(`titles.${title}`).subscribe((translatedTitle) => {
         this.title.setTitle(`${translatedTitle} - ${this.siteName}`);
       });
     } else {

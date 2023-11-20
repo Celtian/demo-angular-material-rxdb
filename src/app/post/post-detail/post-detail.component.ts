@@ -84,8 +84,8 @@ export class PostDetailComponent implements OnInit, OnDestroy {
                 const canonical = this.lr.translateRoute(`/${id}`) as string;
                 this.seoService.setSeo(
                   {
-                    title: this.translate.instant(`SEO.${ROUTE_DEFINITION.POSTS.DETAIL}.title`),
-                    description: this.translate.instant(`SEO.${ROUTE_DEFINITION.POSTS.DETAIL}.description`),
+                    title: this.translate.instant(`seo.${ROUTE_DEFINITION.POSTS.DETAIL}.title`),
+                    description: this.translate.instant(`seo.${ROUTE_DEFINITION.POSTS.DETAIL}.description`),
                   },
                   canonical,
                 );
@@ -112,7 +112,7 @@ export class PostDetailComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (post) => this.dataSource.setData(post),
         error: () => {
-          const error = this.translate.instant('ERROR.unexpected-exception');
+          const error = this.translate.instant('error.unexpected-exception');
           this.dataSource.setError(error);
         },
       });
@@ -128,12 +128,12 @@ export class PostDetailComponent implements OnInit, OnDestroy {
       )
       .subscribe({
         next: () => {
-          this.snackBar.open(this.translate.instant('response.delete.success'), this.translate.instant('UNI.close'));
+          this.snackBar.open(this.translate.instant('response.delete.success'), this.translate.instant('uni.close'));
           const translatedRoute = this.lr.translateRoute(`/`);
           this.router.navigate([translatedRoute]);
         },
         error: () => {
-          this.snackBar.open(this.translate.instant('response.delete.failed'), this.translate.instant('UNI.close'));
+          this.snackBar.open(this.translate.instant('response.delete.failed'), this.translate.instant('uni.close'));
         },
       });
   }

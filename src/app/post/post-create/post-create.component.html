@@ -14,9 +14,9 @@
           <button
             matSuffix
             mat-icon-button
-            [attr.aria-label]="'UNI.clear' | translate"
+            [attr.aria-label]="'uni.clear' | translate"
             (click)="form.controls.title.setValue('')"
-            [matTooltip]="'UNI.clear' | translate"
+            [matTooltip]="'uni.clear' | translate"
           >
             <mat-icon>close</mat-icon>
           </button>
@@ -30,9 +30,9 @@
           <button
             matSuffix
             mat-icon-button
-            [attr.aria-label]="'UNI.clear' | translate"
+            [attr.aria-label]="'uni.clear' | translate"
             (click)="form.controls.body.setValue('')"
-            [matTooltip]="'UNI.clear' | translate"
+            [matTooltip]="'uni.clear' | translate"
           >
             <mat-icon>close</mat-icon>
           </button>
@@ -41,10 +41,10 @@
 
       <div class="flex justify-center gap-2">
         <button mat-button color="primary" [disabled]="form.pristine" type="reset">
-          {{ 'UNI.reset' | translate }}
+          {{ 'uni.reset' | translate }}
         </button>
         <button mat-flat-button color="primary" [disabled]="form.pristine || form.invalid" type="submit">
-          {{ 'UNI.submit' | translate }}
+          {{ 'uni.submit' | translate }}
         </button>
       </div>
     </form>
@@ -52,7 +52,7 @@
 </mat-card>
 
 <div *cdkPortal class="container flex items-center gap-1 py-4">
-  <a mat-button color="primary" [routerLink]="['/' | localize]">{{ 'BREADCRUMBS.app.posts' | translate }}</a>
+  <a mat-button color="primary" [routerLink]="['/' | localize]">{{ 'breadcrumbs.app.posts' | translate }}</a>
   <mat-icon aria-hidden="false" aria-label="Arrow icon" fontIcon="chevron_right"></mat-icon>
-  <a mat-button color="primary" [routerLink]="['/create' | localize]">{{ 'BREADCRUMBS.posts.create' | translate }}</a>
+  <a mat-button color="primary" [routerLink]="['/create' | localize]">{{ 'breadcrumbs.posts.create' | translate }}</a>
 </div>

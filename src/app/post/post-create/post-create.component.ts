@@ -87,8 +87,8 @@ export class PostCreateComponent implements OnDestroy, OnInit, CanComponentDeact
       const canonical = this.lr.translateRoute(`/${ROUTE_DEFINITION.POSTS.CREATE}`) as string;
       this.seoService.setSeo(
         {
-          title: this.translate.instant(`SEO.${ROUTE_DEFINITION.POSTS.CREATE}.title`),
-          description: this.translate.instant(`SEO.${ROUTE_DEFINITION.POSTS.CREATE}.description`),
+          title: this.translate.instant(`seo.${ROUTE_DEFINITION.POSTS.CREATE}.title`),
+          description: this.translate.instant(`seo.${ROUTE_DEFINITION.POSTS.CREATE}.description`),
         },
         canonical,
       );
@@ -106,12 +106,12 @@ export class PostCreateComponent implements OnDestroy, OnInit, CanComponentDeact
       .subscribe({
         next: (post) => {
           this.form.reset(post);
-          this.snackBar.open(this.translate.instant('response.create.success'), this.translate.instant('UNI.close'));
+          this.snackBar.open(this.translate.instant('response.create.success'), this.translate.instant('uni.close'));
           const translatedRoute = this.lr.translateRoute(`/`);
           this.router.navigate([translatedRoute]);
         },
         error: () => {
-          this.snackBar.open(this.translate.instant('response.create.failed'), this.translate.instant('UNI.close'));
+          this.snackBar.open(this.translate.instant('response.create.failed'), this.translate.instant('uni.close'));
         },
       });
   }

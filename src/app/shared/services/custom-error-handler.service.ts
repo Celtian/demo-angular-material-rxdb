@@ -14,7 +14,7 @@ export class CustomErrorHandlerService implements ErrorHandler {
 
   public handleError(error: unknown): void {
     this.ngZone.run(() => {
-      this.snackbar.open(this.translate.instant('ERROR.unexpected-exception'), 'danger');
+      this.snackbar.open(this.translate.instant('error.unexpected-exception'), 'danger');
     });
 
     throw error;

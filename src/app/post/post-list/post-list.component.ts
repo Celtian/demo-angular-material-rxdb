@@ -97,8 +97,8 @@ export class PostListComponent implements OnInit, OnDestroy {
       const canonical = this.lr.translateRoute(`/`) as string;
       this.seoService.setSeo(
         {
-          title: this.translate.instant(`SEO.${ROUTE_DEFINITION.APP.POSTS}.title`),
-          description: this.translate.instant(`SEO.${ROUTE_DEFINITION.APP.POSTS}.description`),
+          title: this.translate.instant(`seo.${ROUTE_DEFINITION.APP.POSTS}.title`),
+          description: this.translate.instant(`seo.${ROUTE_DEFINITION.APP.POSTS}.description`),
         },
         canonical,
       );
@@ -170,10 +170,10 @@ export class PostListComponent implements OnInit, OnDestroy {
       .subscribe({
         next: () => {
           this.data.update((value) => value.filter((i) => i.id !== row.id));
-          this.snackBar.open(this.translate.instant('response.delete.success'), this.translate.instant('UNI.close'));
+          this.snackBar.open(this.translate.instant('response.delete.success'), this.translate.instant('uni.close'));
         },
         error: () => {
-          this.snackBar.open(this.translate.instant('response.delete.failed'), this.translate.instant('UNI.close'));
+          this.snackBar.open(this.translate.instant('response.delete.failed'), this.translate.instant('uni.close'));
         },
       });
   }

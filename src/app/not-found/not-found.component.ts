@@ -31,8 +31,8 @@ export class NotFoundComponent implements OnInit {
       const canonical = this.lr.translateRoute(`/${ROUTE_DEFINITION.APP.NOT_FOUND}`) as string;
       this.seoService.setSeo(
         {
-          title: this.translate.instant(`SEO.${ROUTE_DEFINITION.APP.NOT_FOUND}.title`),
-          description: this.translate.instant(`SEO.${ROUTE_DEFINITION.APP.NOT_FOUND}.description`),
+          title: this.translate.instant(`seo.${ROUTE_DEFINITION.APP.NOT_FOUND}.title`),
+          description: this.translate.instant(`seo.${ROUTE_DEFINITION.APP.NOT_FOUND}.description`),
         },
         canonical,
       );
