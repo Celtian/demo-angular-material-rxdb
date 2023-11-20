@@ -46,3 +46,4 @@ Thumbs.db
 version.ts
 *.log
 .firebase
+.nx
