@@ -2,8 +2,7 @@
   "extends": [
     "stylelint-config-standard",
     "stylelint-config-tailwindcss",
-    "stylelint-config-standard-scss",
-    "stylelint-config-prettier"
+    "stylelint-config-standard-scss"
   ],
   "rules": {
     "no-empty-source": null,
