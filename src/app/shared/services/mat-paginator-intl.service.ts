@@ -4,16 +4,16 @@ import { TranslateService } from '@ngx-translate/core';
 
 @Injectable()
 export class MatPaginationIntlService extends MatPaginatorIntl {
-  constructor(private translateService: TranslateService) {
+  constructor(private translate: TranslateService) {
     super();
-    this.translateService.onLangChange.subscribe(() => {
+    this.translate.onLangChange.subscribe(() => {
       this.translateLabels();
     });
     this.translateLabels();
   }
 
   override getRangeLabel = (page: number, pageSize: number, length: number): string => {
-    const of = this.translateService ? this.translateService.instant('mat-paginator.of') : 'of';
+    const of = this.translate ? this.translate.instant('mat-paginator.of') : 'of';
     if (length === 0 || pageSize === 0) {
       return '0 ' + of + ' ' + length;
     }
@@ -25,9 +25,9 @@ export class MatPaginationIntlService extends MatPaginatorIntl {
   };
 
   injectTranslateService(translate: TranslateService): void {
-    this.translateService = translate;
+    this.translate = translate;
 
-    this.translateService.onLangChange.subscribe(() => {
+    this.translate.onLangChange.subscribe(() => {
       this.translateLabels();
     });
 
@@ -35,11 +35,11 @@ export class MatPaginationIntlService extends MatPaginatorIntl {
   }
 
   translateLabels(): void {
-    this.firstPageLabel = this.translateService.instant('mat-paginator.first-page');
-    this.itemsPerPageLabel = this.translateService.instant('mat-paginator.items-per-page');
-    this.lastPageLabel = this.translateService.instant('mat-paginator.last-page');
-    this.nextPageLabel = this.translateService.instant('mat-paginator.next-page');
-    this.previousPageLabel = this.translateService.instant('mat-paginator.previous-page');
+    this.firstPageLabel = this.translate.instant('mat-paginator.first-page');
+    this.itemsPerPageLabel = this.translate.instant('mat-paginator.items-per-page');
+    this.lastPageLabel = this.translate.instant('mat-paginator.last-page');
+    this.nextPageLabel = this.translate.instant('mat-paginator.next-page');
+    this.previousPageLabel = this.translate.instant('mat-paginator.previous-page');
     this.changes.next(); // Fire a change event to make sure that the labels are refreshed
   }
 }
