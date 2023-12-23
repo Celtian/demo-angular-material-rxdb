@@ -12,6 +12,7 @@ import { NgxAppVersionDirective } from 'ngx-app-version';
 import { Observable } from 'rxjs';
 import { VERSION } from 'src/environments/version';
 import { DEFAULT_LANGUAGE } from './shared/constants/language.constant';
+import { SeoDirective } from './shared/directives/seo.directive';
 import { BreadcrumbsPortalService } from './shared/services/breadcrumbs-portal.service';
 import { RxdbProvider } from './shared/services/db.service';
 import { LanguageService } from './shared/services/language.service';
@@ -21,7 +22,7 @@ import { LanguageService } from './shared/services/language.service';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
-  hostDirectives: [NgxAppVersionDirective],
+  hostDirectives: [NgxAppVersionDirective, SeoDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     AsyncPipe,

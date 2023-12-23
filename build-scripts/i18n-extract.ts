@@ -211,9 +211,9 @@ main({
   dryRun: false,
   encoding: 'utf-8',
   defaultValue: '███',
-  cwd: path.join(process.cwd(), '..'),
-  source: ['src/app/**/*.ts', 'src/app/**/*.html'],
-  langs: ['src/assets/i18n/*.json'],
+  cwd: path.join(process.cwd(), 'src'),
+  source: ['app/**/*.ts', 'app/**/*.html'],
+  langs: ['assets/i18n/*.json'],
   regex: {
     html: [
       {

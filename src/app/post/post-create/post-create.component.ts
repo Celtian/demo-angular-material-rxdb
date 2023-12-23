@@ -9,7 +9,6 @@ import {
   ViewChild,
   inject,
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -28,8 +27,6 @@ import { CanComponentDeactivate } from 'src/app/shared/guards/can-deactivate-gua
 import { ApiService } from 'src/app/shared/services/api.service';
 import { BreadcrumbsPortalService } from 'src/app/shared/services/breadcrumbs-portal.service';
 import { CustomConfirmDialog, CustomConfirmDialogService } from 'src/app/shared/services/custom-confirm-dialog.service';
-import { LanguageService } from 'src/app/shared/services/language.service';
-import { SeoService } from 'src/app/shared/services/seo.service';
 
 @Component({
   standalone: true,
@@ -66,8 +63,6 @@ export class PostCreateComponent implements OnDestroy, OnInit, CanComponentDeact
     private apiService: ApiService<PostDto>,
     private breadcrumbsPortalService: BreadcrumbsPortalService,
     private cdr: ChangeDetectorRef,
-    private language: LanguageService,
-    private seoService: SeoService,
     private translate: TranslateService,
     private lr: LocalizeRouterService,
     private snackBar: MatSnackBar,
@@ -82,17 +77,6 @@ export class PostCreateComponent implements OnDestroy, OnInit, CanComponentDeact
   public ngOnInit(): void {
     this.breadcrumbsPortalService.setPortal(this.portalContent);
     setTimeout(() => this.cdr.detectChanges());
-
-    this.language.language$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
-      const canonical = this.lr.translateRoute(`/${ROUTE_DEFINITION.POSTS.CREATE}`) as string;
-      this.seoService.setSeo(
-        {
-          title: this.translate.instant(`seo.${ROUTE_DEFINITION.POSTS.CREATE}.title`),
-          description: this.translate.instant(`seo.${ROUTE_DEFINITION.POSTS.CREATE}.description`),
-        },
-        canonical,
-      );
-    });
   }
 
   public ngOnDestroy(): void {

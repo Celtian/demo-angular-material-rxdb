@@ -25,7 +25,13 @@
 
       <mat-form-field class="w-full">
         <mat-label>{{ 'form.post.body.label' | translate }}</mat-label>
-        <textarea matInput [placeholder]="'form.post.body.placeholder' | translate" formControlName="body"></textarea>
+        <textarea
+          matInput
+          cdkTextareaAutosize
+          #autosize="cdkTextareaAutosize"
+          [placeholder]="'form.post.body.placeholder' | translate"
+          formControlName="body"
+        ></textarea>
         @if (form.controls.body.value) {
           <button
             matSuffix

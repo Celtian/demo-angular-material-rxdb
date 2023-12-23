@@ -26,8 +26,8 @@ export class DataSource<T> {
     this.updateState();
   }
 
-  public setData(data: T): void {
-    this.data.set(data);
+  public setData(data?: T): void {
+    this.data.set(data || this.initialData);
     this.updateState();
   }
 }

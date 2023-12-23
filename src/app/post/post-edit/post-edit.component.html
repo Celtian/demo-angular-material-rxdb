@@ -1,7 +1,9 @@
 @if (dataSource.state() === 'loading' || dataSource.state() === 'data') {
   @if (dataSource.state() === 'data') {
     <div class="flex items-end justify-end gap-2">
-      <button mat-button color="accent" (click)="onDelete()">{{ 'uni.delete' | translate }}</button>
+      <button mat-button color="accent" [appPostDelete]="dataSource.data().id" (deleted)="onDeleted()">
+        {{ 'uni.delete' | translate }}
+      </button>
     </div>
   }
 
@@ -32,7 +34,13 @@
 
         <mat-form-field class="w-full">
           <mat-label>{{ 'form.post.body.label' | translate }}</mat-label>
-          <textarea matInput [placeholder]="'form.post.body.placeholder' | translate" formControlName="body"></textarea>
+          <textarea
+            matInput
+            cdkTextareaAutosize
+            #autosize="cdkTextareaAutosize"
+            [placeholder]="'form.post.body.placeholder' | translate"
+            formControlName="body"
+          ></textarea>
           @if (form.controls.body.value) {
             <button
               matSuffix

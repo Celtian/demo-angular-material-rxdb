@@ -71,7 +71,7 @@
           <mat-icon>edit</mat-icon>
           <span>{{ 'uni.edit' | translate }}</span>
         </a>
-        <button mat-menu-item (click)="onDelete(row)">
+        <button mat-menu-item [appPostDelete]="row.id" (deleted)="onDeleted(row.id)">
           <mat-icon>delete</mat-icon>
           <span>{{ 'uni.delete' | translate }}</span>
         </button>

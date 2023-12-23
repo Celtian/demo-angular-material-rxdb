@@ -4,6 +4,14 @@ import { v4 as uuidv4 } from 'uuid';
 import { PostDto } from '../dto/post.dto';
 import { RxdbProvider } from './db.service';
 
+interface PostListInput {
+  page: number;
+  limit: number;
+  sort: keyof PostDto;
+  order: 'asc' | 'desc';
+  query: string;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -19,13 +27,13 @@ export class ApiService<T> {
       this.collection.insert({
         id: uuidv4(),
         ...body,
-      })
+      }),
     ).pipe(map((doc) => doc._data));
   }
 
   public patch(id: string, body: Partial<T>) {
     return from(this.collection.findOne({ selector: { id } }).update({ id, ...body })).pipe(
-      map((doc) => ({ ...doc._data, ...body }))
+      map((doc) => ({ ...doc._data, ...body })),
     );
   }
 
@@ -41,21 +49,21 @@ export class ApiService<T> {
     return from(this.collection.findOne({ selector: { id } }).remove()).pipe(map((doc) => doc._data));
   }
 
-  public list(page = 1, limit = 5, sort: keyof PostDto = 'id', order: 'asc' | 'desc' = 'asc', query = '') {
-    const selector = query ? { title: { $regex: new RegExp(query, 'i') } } : undefined;
+  public list(input: PostListInput) {
+    const selector = input.query ? { title: { $regex: new RegExp(input.query, 'i') } } : undefined;
     return from(
       this.collection
         .find({
-          skip: page - 1,
-          limit,
+          skip: input.page - 1,
+          limit: input.limit,
           selector,
           sort: [
             {
-              [sort]: order,
+              [input.sort]: input.order,
             },
           ],
         })
-        .exec()
+        .exec(),
     ).pipe(map((docs) => docs.map((doc) => doc._data)));
   }
 
@@ -63,12 +71,12 @@ export class ApiService<T> {
     return from(this.collection.count().exec());
   }
 
-  public listAndCount(page = 1, limit = 5, sort: keyof PostDto = 'id', order: 'asc' | 'desc' = 'asc', query = '') {
-    return combineLatest([this.list(page, limit, sort, order, query), this.count()]).pipe(
+  public listAndCount(input: PostListInput) {
+    return combineLatest([this.list(input), this.count()]).pipe(
       map(([items, totalCount]) => ({
         items,
         totalCount,
-      }))
+      })),
     );
   }
 }
