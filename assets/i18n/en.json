@@ -119,14 +119,15 @@
     }
   },
   "titles": {
-    "app": {
-      "not-found": "Page was not found",
-      "posts": "List of posts"
+    "action": {
+      "create": "Create",
+      "detail": "Detail",
+      "edit": "Edit",
+      "list": "List"
     },
-    "posts": {
-      "create": "Create post",
-      "detail": "Post detail",
-      "edit": "Edit post"
+    "section": {
+      "not-found": "Not found",
+      "posts": "Posts"
     }
   },
   "uni": {

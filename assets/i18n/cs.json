@@ -119,14 +119,15 @@
     }
   },
   "titles": {
-    "app": {
-      "not-found": "Stránka nebyla nalezena",
-      "posts": "Seznam příspěvků"
+    "action": {
+      "create": "vytvořit",
+      "detail": "detail",
+      "edit": "upravit",
+      "list": "seznam"
     },
-    "posts": {
-      "create": "Vytvořit příspěvek",
-      "detail": "Detail příspěvku",
-      "edit": "Upravit příspěvek"
+    "section": {
+      "not-found": "nenalezeno",
+      "posts": "příspěvky"
     }
   },
   "uni": {
