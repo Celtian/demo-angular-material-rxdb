@@ -26,6 +26,9 @@
     "post-was-not-found": "Příspěvek nebyl nalezen",
     "unexpected-exception": "Neočekávaná chyba"
   },
+  "footer": {
+    "content": "Všechna práva vyhrazena © {{ endYear }}"
+  },
   "form": {
     "post": {
       "body": {
