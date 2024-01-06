@@ -1,7 +1,6 @@
 import { CdkPortal, PortalModule } from '@angular/cdk/portal';
 import {
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   DestroyRef,
   OnDestroy,
@@ -77,28 +76,31 @@ export class PostListComponent implements OnInit, OnDestroy {
   public sortBy = signal<keyof PostDto>('id');
   public sortDirection = signal<'asc' | 'desc'>('asc');
 
+  private dbReady = signal(false);
+
   constructor(
     private apiService: ApiService<PostDto>,
     private rxdbProvider: RxdbProvider,
-    private cdr: ChangeDetectorRef,
     private router: Router,
     private route: ActivatedRoute,
     private breadcrumbsPortalService: BreadcrumbsPortalService,
   ) {
     effect(() => {
-      this.apiService
-        .listAndCount({
-          page: this.pageIndex(),
-          limit: this.pageSize(),
-          sort: this.sortBy(),
-          order: this.sortDirection(),
-          query: this.query(),
-        })
-        .pipe(takeUntilDestroyed(this.destroyRef))
-        .subscribe((posts) => {
-          this.data.set(posts.items);
-          this.totalCount.set(posts.totalCount);
-        });
+      if (this.dbReady()) {
+        this.apiService
+          .listAndCount({
+            page: this.pageIndex(),
+            limit: this.pageSize(),
+            sort: this.sortBy(),
+            order: this.sortDirection(),
+            query: this.query(),
+          })
+          .pipe(takeUntilDestroyed(this.destroyRef))
+          .subscribe((posts) => {
+            this.data.set(posts.items);
+            this.totalCount.set(posts.totalCount);
+          });
+      }
     });
   }
 
@@ -128,10 +130,8 @@ export class PostListComponent implements OnInit, OnDestroy {
         filter((ready) => !!ready),
         first(),
       )
-      .subscribe(() => this.bindData());
+      .subscribe(() => this.dbReady.set(true));
   }
-
-  private bindData(): void {}
 
   public onPageChange(event: PageEvent): void {
     let pageIndex = null;
