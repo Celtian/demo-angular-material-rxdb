@@ -22,7 +22,7 @@ export class CustomTitleStrategyService extends TitleStrategy {
     const title = this.buildTitle(snapshot);
     if (title) {
       const parsedData = this.parseTitleData(title);
-      this.translate.getTranslation(this.translate.currentLang).subscribe(() => {
+      this.translate.getStreamOnTranslationChange(this.translate.currentLang).subscribe(() => {
         this.translateTitleFromParts(parsedData, parsedData.identifier);
         this.updateMeta(parsedData.description);
       });

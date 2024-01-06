@@ -70,7 +70,11 @@
 @if (dataSource.state() === 'error') {
   <mat-card>
     <mat-card-content class="flex flex-col gap-2 text-center">
-      <mat-icon aria-hidden="false" aria-label="Error icon" fontIcon="error"></mat-icon>
+      <mat-icon
+        aria-hidden="false"
+        [attr.aria-label]="'uni.aria-label.error-icon' | translate"
+        fontIcon="error"
+      ></mat-icon>
       <div>{{ dataSource.error() }}</div>
     </mat-card-content>
   </mat-card>
@@ -79,7 +83,11 @@
 @if (dataSource.state() === 'empty') {
   <mat-card>
     <mat-card-content class="flex flex-col gap-2 text-center">
-      <mat-icon aria-hidden="false" aria-label="Warning icon" fontIcon="warning"></mat-icon>
+      <mat-icon
+        aria-hidden="false"
+        [attr.aria-label]="'uni.aria-label.warning-icon' | translate"
+        fontIcon="warning"
+      ></mat-icon>
       <div>{{ 'error.post-was-not-found' | translate }}</div>
     </mat-card-content>
   </mat-card>
@@ -88,9 +96,17 @@
 <div *cdkPortal class="container flex items-center gap-1 py-4">
   <a mat-button color="primary" [routerLink]="['/' | localize]">{{ 'breadcrumbs.app.posts' | translate }}</a>
   @if (dataSource.state() === 'data') {
-    <mat-icon aria-hidden="false" aria-label="Arrow icon" fontIcon="chevron_right"></mat-icon>
+    <mat-icon
+      aria-hidden="false"
+      [attr.aria-label]="'uni.aria-label.arrow-icon' | translate"
+      fontIcon="chevron_right"
+    ></mat-icon>
     <a mat-button color="primary" [routerLink]="['/' | localize, dataSource.data().id]">{{ dataSource.data().id }}</a>
-    <mat-icon aria-hidden="false" aria-label="Arrow icon" fontIcon="chevron_right"></mat-icon>
+    <mat-icon
+      aria-hidden="false"
+      [attr.aria-label]="'uni.aria-label.arrow-icon' | translate"
+      fontIcon="chevron_right"
+    ></mat-icon>
     <a
       mat-button
       color="primary"

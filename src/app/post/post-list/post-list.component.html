@@ -4,9 +4,10 @@
     matInput
     (input)="onQueryChange($event)"
     [placeholder]="'input.search.placeholder' | translate"
-    [(ngModel)]="query"
+    [ngModel]="query()"
+    (ngModelChange)="query.set($event)"
   />
-  @if (query) {
+  @if (query()) {
     <button
       matSuffix
       mat-icon-button
@@ -30,8 +31,8 @@
   [fixedLayout]="true"
   [dataSource]="data()"
   matSort
-  matSortActive="id"
-  matSortDirection="asc"
+  [matSortActive]="sortBy()"
+  [matSortDirection]="sortDirection()"
   matSortDisableClear
   [trackBy]="trackByPostId"
   (matSortChange)="onSortChange($event)"
@@ -59,7 +60,7 @@
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef>&nbsp;</th>
     <td mat-cell *matCellDef="let row">
-      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+      <button mat-icon-button [matMenuTriggerFor]="menu" [attr.aria-label]="'uni.aria-label.show-actions' | translate">
         <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
@@ -85,9 +86,11 @@
 
 <mat-paginator
   [pageSizeOptions]="pageSizeOptions"
+  [pageSize]="pageSize()"
+  [pageIndex]="pageIndex() - 1"
   [length]="totalCount()"
   (page)="onPageChange($event)"
-  aria-label="Select page of posts"
+  [attr.aria-label]="'uni.aria-label.select-page-of-posts' | translate"
 ></mat-paginator>
 
 <div *cdkPortal class="container py-4">
