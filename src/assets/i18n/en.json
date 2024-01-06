@@ -26,6 +26,9 @@
     "post-was-not-found": "Post was not found",
     "unexpected-exception": "Unexpected error"
   },
+  "footer": {
+    "content": "All rights reserved © {{ endYear }}"
+  },
   "form": {
     "post": {
       "body": {

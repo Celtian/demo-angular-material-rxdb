@@ -8,6 +8,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TitleStrategy, provideRouter, withViewTransitions } from '@angular/router';
 import { provideAppVersion } from 'ngx-app-version';
+import { provideFixedFooter } from 'ngx-fixed-footer';
 import { provideTranslateVersion } from 'ngx-translate-version';
 import { VERSION } from '../environments/version';
 import { routes } from './app.routes';
@@ -25,6 +26,10 @@ export const appConfig: ApplicationConfig = {
     }),
     provideTranslateVersion(routes, {
       version: VERSION.version,
+    }),
+    provideFixedFooter({
+      containerSelector: '.permanent-main',
+      cssAttribute: 'margin',
     }),
     importProvidersFrom(BrowserModule, BrowserAnimationsModule, MatSnackBarModule, MatDialogModule),
     { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { verticalPosition: 'top', horizontalPosition: 'right' } },

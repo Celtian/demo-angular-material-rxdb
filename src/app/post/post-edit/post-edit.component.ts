@@ -121,7 +121,8 @@ export class PostEditComponent implements OnInit, OnDestroy, CanComponentDeactiv
           this.form.reset(post);
           this.snackBar.open(this.translate.instant('response.update.success'), this.translate.instant('uni.close'));
         },
-        error: () => {
+        error: (err) => {
+          console.log(err);
           this.snackBar.open(this.translate.instant('response.update.failed'), this.translate.instant('uni.close'));
         },
       });

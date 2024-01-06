@@ -1,4 +1,4 @@
-<header class="z-10 sticky-top">
+<header class="sticky top-0 z-10">
   <mat-toolbar color="primary" role="navigation">
     <nav class="container flex items-center justify-between gap-2">
       <a mat-button [routerLink]="['/' | localize]">Angular RXDB Demo</a>
@@ -7,9 +7,17 @@
   </mat-toolbar>
 </header>
 
-<main class="flex-1">
+<main class="flex-1 permanent-main">
   @if (breadcrumbsPortal$ | async; as portal) {
     <ng-template [cdkPortalOutlet]="portal"></ng-template>
   }
   <router-outlet></router-outlet>
 </main>
+
+<footer ngxFixedFooter class="fixed bottom-0 w-full text-center">
+  <mat-toolbar color="primary">
+    <div class="container text-sm">
+      {{ 'footer.content' | translate: { endYear } }}
+    </div>
+  </mat-toolbar>
+</footer>

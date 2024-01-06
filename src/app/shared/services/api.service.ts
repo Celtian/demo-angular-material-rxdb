@@ -32,9 +32,11 @@ export class ApiService<T> {
   }
 
   public patch(id: string, body: Partial<T>) {
-    return from(this.collection.findOne({ selector: { id } }).update({ id, ...body })).pipe(
-      map((doc) => ({ ...doc._data, ...body })),
-    );
+    return from(
+      this.collection.findOne({ selector: { id } }).update({
+        $set: { id, ...body },
+      }),
+    ).pipe(map((doc) => ({ ...doc._data, ...body })));
   }
 
   public put(id: string, body: T) {
@@ -50,7 +52,7 @@ export class ApiService<T> {
   }
 
   public list(input: PostListInput) {
-    const selector = input.query ? { title: { $regex: new RegExp(input.query, 'i') } } : undefined;
+    const selector = input.query ? { title: { $regex: input.query, $options: 'i' } } : undefined;
     return from(
       this.collection
         .find({
