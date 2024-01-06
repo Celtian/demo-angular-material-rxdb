@@ -134,6 +134,13 @@
     }
   },
   "uni": {
+    "aria-label": {
+      "arrow-icon": "Arrow icon",
+      "error-icon": "Error icon",
+      "select-page-of-posts": "Select page of posts",
+      "show-actions": "Zobrazit akce",
+      "warning-icon": "Warning icon"
+    },
     "clear": "Clear",
     "clear-filters": "Clear filters",
     "close": "Close",
