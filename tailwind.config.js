@@ -1,10 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 /* eslint-env es6 */
 /* eslint-disable */
-const { guessProductionMode } = require('@ngneat/tailwind');
 const colors = require('tailwindcss/colors');
-
-process.env.TAILWIND_MODE = guessProductionMode() ? 'build' : 'watch';
 
 module.exports = {
   mode: 'jit',

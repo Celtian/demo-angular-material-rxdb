@@ -1,4 +1,4 @@
-import { Directive, EventEmitter, HostListener, Input, Output } from '@angular/core';
+import { Directive, EventEmitter, HostListener, Output, input } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslateService } from '@ngx-translate/core';
 import { filter, first, switchMap } from 'rxjs';
@@ -11,7 +11,7 @@ import { CustomConfirmDialog, CustomConfirmDialogService } from '../services/cus
   standalone: true,
 })
 export class PostDeleteDirective {
-  @Input({ required: true, alias: 'appPostDelete' }) public id!: string;
+  public id = input.required<string>({ alias: 'appPostDelete' });
   @Output() public deleted = new EventEmitter<string>();
 
   constructor(
@@ -28,11 +28,11 @@ export class PostDeleteDirective {
       .pipe(
         first(),
         filter((res) => !!res),
-        switchMap(() => this.apiService.delete(this.id)),
+        switchMap(() => this.apiService.delete(this.id())),
       )
       .subscribe({
         next: () => {
-          this.deleted.emit(this.id);
+          this.deleted.emit(this.id());
           this.snackBar.open(this.translate.instant('response.delete.success'), this.translate.instant('uni.close'));
         },
         error: () => {
