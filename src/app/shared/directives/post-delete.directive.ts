@@ -1,4 +1,4 @@
-import { Directive, EventEmitter, HostListener, Output, input } from '@angular/core';
+import { Directive, HostListener, input, output } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslateService } from '@ngx-translate/core';
 import { filter, first, switchMap } from 'rxjs';
@@ -12,7 +12,7 @@ import { CustomConfirmDialog, CustomConfirmDialogService } from '../services/cus
 })
 export class PostDeleteDirective {
   public id = input.required<string>({ alias: 'appPostDelete' });
-  @Output() public deleted = new EventEmitter<string>();
+  public deleted = output<string>();
 
   constructor(
     private apiService: ApiService<PostDto>,
