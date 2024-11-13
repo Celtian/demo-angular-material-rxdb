@@ -62,7 +62,7 @@
               "events",
               "immediate",
               "modifyjs"
-           ]
+            ]
           },
           "configurations": {
             "production": {
@@ -143,7 +143,12 @@
           "builder": "ngx-devkit-builders:version",
           "options": {
             "outputFile": "src/environments/version.ts",
-            "fields": ["version", "date", "git", "author"],
+            "fields": [
+              "version",
+              "date",
+              "git",
+              "author"
+            ],
             "lint": "eslint",
             "verbose": false
           }
