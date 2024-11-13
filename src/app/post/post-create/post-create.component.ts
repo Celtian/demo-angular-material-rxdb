@@ -20,7 +20,6 @@ import { Router, RouterLink } from '@angular/router';
 import { LocalizeRouterModule, LocalizeRouterService } from '@gilsdav/ngx-translate-router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Observable, first } from 'rxjs';
-import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
 import { ROUTE_DEFINITION } from 'src/app/shared/constants/route-definition.constant';
 import { PostDto, PostInputDto } from 'src/app/shared/dto/post.dto';
 import { CanComponentDeactivate } from 'src/app/shared/guards/can-deactivate-guard.service';
@@ -29,7 +28,6 @@ import { BreadcrumbsPortalService } from 'src/app/shared/services/breadcrumbs-po
 import { CustomConfirmDialog, CustomConfirmDialogService } from 'src/app/shared/services/custom-confirm-dialog.service';
 
 @Component({
-  standalone: true,
   selector: 'app-post-create',
   templateUrl: './post-create.component.html',
   styleUrl: './post-create.component.scss',
@@ -43,7 +41,6 @@ import { CustomConfirmDialog, CustomConfirmDialogService } from 'src/app/shared/
     MatTooltipModule,
     PortalModule,
     TranslateModule,
-    ConfirmDialogComponent,
     RouterLink,
     LocalizeRouterModule,
   ],

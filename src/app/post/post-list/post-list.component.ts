@@ -36,7 +36,6 @@ import { BreadcrumbsPortalService } from 'src/app/shared/services/breadcrumbs-po
 import { RxdbProvider } from 'src/app/shared/services/db.service';
 
 @Component({
-  standalone: true,
   selector: 'app-post-list',
   templateUrl: './post-list.component.html',
   styleUrl: './post-list.component.scss',

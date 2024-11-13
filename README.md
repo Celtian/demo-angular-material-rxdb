@@ -3,7 +3,7 @@
 ## Description
 
 - Standards: HTML5, CSS3
-- Components: Angular 18, Angular Material, Tailwind CSS, RxDB
+- Components: Angular 19, Angular Material, Tailwind CSS, RxDB
 - Software: Visual Studio Code
 - See [Humans.txt](https://celtian.github.io/demo-angular-material-rxdb/humans.txt)
 - Deployed [here](https://celtian.github.io/demo-angular-material-rxdb/)

@@ -18,7 +18,6 @@ import { RxdbProvider } from './shared/services/db.service';
 import { LanguageService } from './shared/services/language.service';
 
 @Component({
-  standalone: true,
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
