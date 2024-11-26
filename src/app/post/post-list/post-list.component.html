@@ -91,7 +91,7 @@
   [length]="totalCount()"
   (page)="onPageChange($event)"
   [attr.aria-label]="'uni.aria-label.select-page-of-posts' | translate"
-></mat-paginator>
+/>
 
 <div *cdkPortal class="container py-4">
   <a mat-button color="primary" [routerLink]="['/' | localize]">{{ 'breadcrumbs.app.posts' | translate }}</a>

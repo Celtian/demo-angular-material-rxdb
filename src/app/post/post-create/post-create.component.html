@@ -59,10 +59,6 @@
 
 <div *cdkPortal class="container flex items-center gap-1 py-4">
   <a mat-button color="primary" [routerLink]="['/' | localize]">{{ 'breadcrumbs.app.posts' | translate }}</a>
-  <mat-icon
-    aria-hidden="false"
-    [attr.aria-label]="'uni.aria-label.arrow-icon' | translate"
-    fontIcon="chevron_right"
-  ></mat-icon>
+  <mat-icon aria-hidden="false" [attr.aria-label]="'uni.aria-label.arrow-icon' | translate" fontIcon="chevron_right" />
   <a mat-button color="primary" [routerLink]="['/create' | localize]">{{ 'breadcrumbs.posts.create' | translate }}</a>
 </div>

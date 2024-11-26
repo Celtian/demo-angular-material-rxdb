@@ -9,9 +9,9 @@
 
 <main class="flex-1 permanent-main">
   @if (breadcrumbsPortal$ | async; as portal) {
-    <ng-template [cdkPortalOutlet]="portal"></ng-template>
+    <ng-template [cdkPortalOutlet]="portal" />
   }
-  <router-outlet></router-outlet>
+  <router-outlet />
 </main>
 
 <footer ngxFixedFooter class="fixed bottom-0 w-full text-center">

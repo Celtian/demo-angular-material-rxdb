@@ -5,10 +5,22 @@
     "body": ["throw new Error('Method not implemented.');"],
     "description": "Throw error in method which is not implemented."
   },
-  "Destroy Ref": {
+  "DestroyRef": {
     "scope": "typescript",
     "prefix": "destr",
     "body": ["private destroyRef = inject(DestroyRef);"],
     "description": "Destroy ref added."
+  },
+  "FormBuilder": {
+    "scope": "typescript",
+    "prefix": "fb",
+    "body": ["private readonly fb = inject(FormBuilder);"],
+    "description": "FormBuilder added."
+  },
+  "ElementRef": {
+    "scope": "typescript",
+    "prefix": "elem",
+    "body": ["private readonly element = inject(ElementRef);"],
+    "description": "ElementRef added."
   }
 }
