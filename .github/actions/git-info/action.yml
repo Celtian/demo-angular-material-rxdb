@@ -1,0 +1,17 @@
+name: Set git info
+description: Set git informations into environment variables
+runs:
+  using: composite
+  steps:
+    - name: Set git vars
+      id: git
+      run: |
+        echo "GIT_VERSION=$(echo $GITHUB_REF | cut -d / -f 3)" >> "${GITHUB_ENV}"
+        echo "GIT_COMMIT=$(git rev-parse --short HEAD)" >> "${GITHUB_ENV}"
+      shell: bash
+
+    - name: Echo git vars
+      run: |
+        echo "${{ env.GIT_VERSION }}"
+        echo "${{ env.GIT_COMMIT }}"
+      shell: bash

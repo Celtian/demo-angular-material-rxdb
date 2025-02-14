@@ -1,0 +1,39 @@
+name: Get & Cache Dependencies
+description: Get dependencies via yarn and cache them
+inputs:
+  caching:
+    description: Whether to cache dependencies or not
+    required: false
+    default: 'true'
+outputs:
+  used-cache:
+    description: Whether the cache was used
+    value: ${{ steps.install.outputs.cache }}
+runs:
+  using: composite
+  steps:
+    - name: Cache dependencies
+      if: inputs.caching == 'true'
+      id: cache
+      uses: actions/cache@v4
+      with:
+        path: node_modules
+        key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+        restore-keys: |
+          ${{ runner.OS }}-yarn-${{ env.cache-name }}-
+          ${{ runner.OS }}-yarn-
+          ${{ runner.OS }}-
+
+    - name: Install
+      if: steps.cache.outputs.cache-hit != 'true' || inputs.caching != 'true'
+      id: install
+      run: |
+        yarn install --frozen-lockfile
+        echo "cache='${{ inputs.caching }}'" >> $GITHUB_OUTPUT
+      shell: bash
+
+    - name: Postinstall
+      if: steps.cache.outputs.cache-hit == 'true' && inputs.caching == 'true'
+      id: postinstall
+      run: yarn postinstall
+      shell: bash
