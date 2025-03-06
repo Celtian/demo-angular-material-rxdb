@@ -19,7 +19,7 @@
     "editor.defaultFormatter": "stylelint.vscode-stylelint"
   },
   "typescript.updateImportsOnFileMove.enabled": "always",
-  "files.eol": "\r\n",
+  "files.eol": "\n",
   "files.encoding": "utf8",
   "prettier.endOfLine": "lf",
   "prettier.prettierPath": "./node_modules/prettier",
