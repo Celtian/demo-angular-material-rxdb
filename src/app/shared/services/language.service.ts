@@ -1,5 +1,4 @@
-import { DOCUMENT } from '@angular/common';
-import { Inject, Injectable } from '@angular/core';
+import { Inject, Injectable, DOCUMENT } from '@angular/core';
 import { Meta } from '@angular/platform-browser';
 import { LocalizeRouterService } from '@gilsdav/ngx-translate-router';
 import { TranslateService } from '@ngx-translate/core';

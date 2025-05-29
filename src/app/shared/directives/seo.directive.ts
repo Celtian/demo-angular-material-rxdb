@@ -1,5 +1,4 @@
-import { DOCUMENT } from '@angular/common';
-import { Directive, Inject, OnInit, Renderer2 } from '@angular/core';
+import { Directive, Inject, OnInit, Renderer2, DOCUMENT } from '@angular/core';
 import { Meta } from '@angular/platform-browser';
 import { NavigationEnd, Router } from '@angular/router';
 import { VERSION } from 'src/environments/version';
