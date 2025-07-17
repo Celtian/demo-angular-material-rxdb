@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { combineLatest, from, map } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
 import { PostDto } from '../dto/post.dto';
@@ -16,7 +16,7 @@ interface PostListInput {
   providedIn: 'root',
 })
 export class ApiService<T> {
-  constructor(private rxdbProvider: RxdbProvider) {}
+  private rxdbProvider = inject(RxdbProvider);
 
   private get collection() {
     return this.rxdbProvider.getDatabaseCollection('posts');

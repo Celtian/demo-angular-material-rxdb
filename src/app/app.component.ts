@@ -36,16 +36,16 @@ import { LanguageService } from './shared/services/language.service';
   ],
 })
 export class AppComponent implements OnInit {
+  private language = inject(LanguageService);
+  private rxdbProvider = inject(RxdbProvider);
+  private breadcrumbsPortalService = inject(BreadcrumbsPortalService);
+
   private destroyRef = inject(DestroyRef);
   public endYear = new Date(VERSION.date).getFullYear();
   public breadcrumbsPortal$!: Observable<Portal<unknown>>;
   public lang = DEFAULT_LANGUAGE;
 
-  constructor(
-    private language: LanguageService,
-    private rxdbProvider: RxdbProvider,
-    private breadcrumbsPortalService: BreadcrumbsPortalService,
-  ) {
+  constructor() {
     this.language.initLang();
   }
 

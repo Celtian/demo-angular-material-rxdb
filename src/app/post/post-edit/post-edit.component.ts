@@ -54,6 +54,17 @@ import { CustomConfirmDialog, CustomConfirmDialogService } from 'src/app/shared/
   ],
 })
 export class PostEditComponent implements OnInit, OnDestroy, CanComponentDeactivate {
+  private breadcrumbsPortalService = inject(BreadcrumbsPortalService);
+  private route = inject(ActivatedRoute);
+  private translate = inject(TranslateService);
+  private lr = inject(LocalizeRouterService);
+  private cdr = inject(ChangeDetectorRef);
+  private fb = inject(FormBuilder);
+  private apiService = inject<ApiService<PostDto>>(ApiService);
+  private confirm = inject(CustomConfirmDialogService);
+  private router = inject(Router);
+  private snackBar = inject(MatSnackBar);
+
   @ViewChild(CdkPortal, { static: true }) public portalContent!: CdkPortal;
   private destroyRef = inject(DestroyRef);
   public dataSource = new DataSource<PostDto>(DEFAULT_POST);
@@ -63,19 +74,6 @@ export class PostEditComponent implements OnInit, OnDestroy, CanComponentDeactiv
     title: ['', [Validators.required, Validators.min(3)]],
     body: ['', [Validators.required, Validators.min(3)]],
   });
-
-  constructor(
-    private breadcrumbsPortalService: BreadcrumbsPortalService,
-    private route: ActivatedRoute,
-    private translate: TranslateService,
-    private lr: LocalizeRouterService,
-    private cdr: ChangeDetectorRef,
-    private fb: FormBuilder,
-    private apiService: ApiService<PostDto>,
-    private confirm: CustomConfirmDialogService,
-    private router: Router,
-    private snackBar: MatSnackBar,
-  ) {}
 
   public canDeactivate(): boolean | Observable<boolean> {
     return this.form.pristine || this.confirm.openCustomConfirmDialog(CustomConfirmDialog.UnsavedWork);

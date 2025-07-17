@@ -1,4 +1,4 @@
-import { Inject, Injectable, DOCUMENT } from '@angular/core';
+import { Injectable, DOCUMENT, inject } from '@angular/core';
 import { Meta } from '@angular/platform-browser';
 import { LocalizeRouterService } from '@gilsdav/ngx-translate-router';
 import { TranslateService } from '@ngx-translate/core';
@@ -10,14 +10,12 @@ import { Language } from '../dto/language.dto';
   providedIn: 'root',
 })
 export class LanguageService {
-  private languageSubject = new BehaviorSubject<Language>(DEFAULT_LANGUAGE);
+  private doc = inject<Document>(DOCUMENT);
+  private lr = inject(LocalizeRouterService);
+  private translate = inject(TranslateService);
+  private meta = inject(Meta);
 
-  constructor(
-    @Inject(DOCUMENT) private doc: Document,
-    private lr: LocalizeRouterService,
-    private translate: TranslateService,
-    private meta: Meta,
-  ) {}
+  private languageSubject = new BehaviorSubject<Language>(DEFAULT_LANGUAGE);
 
   public initLang(): void {
     this.setLang(this.translate.currentLang as Language);

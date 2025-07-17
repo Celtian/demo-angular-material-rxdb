@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { RouterStateSnapshot, TitleStrategy } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -8,15 +8,11 @@ import { PageOptions } from '../dto/page.dto';
   providedIn: 'root',
 })
 export class CustomTitleStrategyService extends TitleStrategy {
-  private readonly siteName = 'RDXB demo';
+  private translate = inject(TranslateService);
+  private title = inject(Title);
+  private meta = inject(Meta);
 
-  constructor(
-    private translate: TranslateService,
-    private title: Title,
-    private meta: Meta,
-  ) {
-    super();
-  }
+  private readonly siteName = 'RDXB demo';
 
   public updateTitle(snapshot: RouterStateSnapshot): void {
     const title = this.buildTitle(snapshot);

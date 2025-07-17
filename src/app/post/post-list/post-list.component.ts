@@ -59,6 +59,12 @@ import { RxdbProvider } from 'src/app/shared/services/db.service';
   ],
 })
 export class PostListComponent implements OnInit, OnDestroy {
+  private apiService = inject<ApiService<PostDto>>(ApiService);
+  private rxdbProvider = inject(RxdbProvider);
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
+  private breadcrumbsPortalService = inject(BreadcrumbsPortalService);
+
   @ViewChild(CdkPortal, { static: true }) public portalContent!: CdkPortal;
 
   public readonly ROUTE_DEFINITION = ROUTE_DEFINITION;
@@ -77,13 +83,7 @@ export class PostListComponent implements OnInit, OnDestroy {
 
   private dbReady = signal(false);
 
-  constructor(
-    private apiService: ApiService<PostDto>,
-    private rxdbProvider: RxdbProvider,
-    private router: Router,
-    private route: ActivatedRoute,
-    private breadcrumbsPortalService: BreadcrumbsPortalService,
-  ) {
+  constructor() {
     effect(() => {
       if (this.dbReady()) {
         this.apiService

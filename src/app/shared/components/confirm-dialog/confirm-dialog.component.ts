@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { TranslateModule } from '@ngx-translate/core';
@@ -16,8 +16,6 @@ export interface ConfirmDialogData {
   imports: [MatDialogModule, MatButtonModule, TranslateModule],
 })
 export class ConfirmDialogComponent {
-  constructor(
-    @Inject(MAT_DIALOG_DATA) public data: ConfirmDialogData,
-    public dialogRef: MatDialogRef<ConfirmDialogComponent>,
-  ) {}
+  data = inject<ConfirmDialogData>(MAT_DIALOG_DATA);
+  dialogRef = inject<MatDialogRef<ConfirmDialogComponent>>(MatDialogRef);
 }

@@ -1,4 +1,4 @@
-import { Directive, Inject, OnInit, Renderer2, DOCUMENT } from '@angular/core';
+import { Directive, OnInit, Renderer2, DOCUMENT, inject } from '@angular/core';
 import { Meta } from '@angular/platform-browser';
 import { NavigationEnd, Router } from '@angular/router';
 import { VERSION } from 'src/environments/version';
@@ -8,14 +8,12 @@ import { VERSION } from 'src/environments/version';
   standalone: true,
 })
 export class SeoDirective implements OnInit {
-  private readonly siteName = 'RXDB demo';
+  private document = inject<Document>(DOCUMENT);
+  private meta = inject(Meta);
+  private router = inject(Router);
+  private renderer = inject(Renderer2);
 
-  constructor(
-    @Inject(DOCUMENT) private document: Document,
-    private meta: Meta,
-    private router: Router,
-    private renderer: Renderer2,
-  ) {}
+  private readonly siteName = 'RXDB demo';
 
   public ngOnInit(): void {
     this.meta.updateTag({ name: 'author', content: VERSION.author.name });

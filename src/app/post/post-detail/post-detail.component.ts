@@ -47,20 +47,18 @@ import { BreadcrumbsPortalService } from 'src/app/shared/services/breadcrumbs-po
   ],
 })
 export class PostDetailComponent implements OnInit, OnDestroy {
+  private breadcrumbsPortalService = inject(BreadcrumbsPortalService);
+  private route = inject(ActivatedRoute);
+  private cdr = inject(ChangeDetectorRef);
+  private translate = inject(TranslateService);
+  private lr = inject(LocalizeRouterService);
+  private apiService = inject<ApiService<PostDto>>(ApiService);
+  private router = inject(Router);
+
   @ViewChild(CdkPortal, { static: true }) public portalContent!: CdkPortal;
   private destroyRef = inject(DestroyRef);
   public dataSource = new DataSource<PostDto>(DEFAULT_POST);
   public readonly ROUTE_DEFINITION = ROUTE_DEFINITION;
-
-  constructor(
-    private breadcrumbsPortalService: BreadcrumbsPortalService,
-    private route: ActivatedRoute,
-    private cdr: ChangeDetectorRef,
-    private translate: TranslateService,
-    private lr: LocalizeRouterService,
-    private apiService: ApiService<PostDto>,
-    private router: Router,
-  ) {}
 
   public ngOnDestroy(): void {
     this.portalContent?.detach();

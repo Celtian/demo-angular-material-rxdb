@@ -1,4 +1,4 @@
-import { Directive, HostListener, input, output } from '@angular/core';
+import { Directive, HostListener, input, output, inject } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslateService } from '@ngx-translate/core';
 import { filter, first, switchMap } from 'rxjs';
@@ -11,15 +11,13 @@ import { CustomConfirmDialog, CustomConfirmDialogService } from '../services/cus
   standalone: true,
 })
 export class PostDeleteDirective {
+  private apiService = inject<ApiService<PostDto>>(ApiService);
+  private confirm = inject(CustomConfirmDialogService);
+  private snackBar = inject(MatSnackBar);
+  private translate = inject(TranslateService);
+
   public id = input.required<string>({ alias: 'appPostDelete' });
   public deleted = output<string>();
-
-  constructor(
-    private apiService: ApiService<PostDto>,
-    private confirm: CustomConfirmDialogService,
-    private snackBar: MatSnackBar,
-    private translate: TranslateService,
-  ) {}
 
   @HostListener('click')
   public onClick(): void {
