@@ -1,4 +1,4 @@
-import { Directive, HostListener, input, output, inject } from '@angular/core';
+import { Directive, HostListener, inject, input, output } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslateService } from '@ngx-translate/core';
 import { filter, first, switchMap } from 'rxjs';
@@ -17,7 +17,7 @@ export class PostDeleteDirective {
   private translate = inject(TranslateService);
 
   public id = input.required<string>({ alias: 'appPostDelete' });
-  public deleted = output<string>();
+  public readonly deleted = output<string>();
 
   @HostListener('click')
   public onClick(): void {

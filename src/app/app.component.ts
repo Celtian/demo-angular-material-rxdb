@@ -19,10 +19,6 @@ import { LanguageService } from './shared/services/language.service';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
-  hostDirectives: [NgxAppVersionDirective, SeoDirective],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     AsyncPipe,
     RouterOutlet,
@@ -34,6 +30,10 @@ import { LanguageService } from './shared/services/language.service';
     LocalizeRouterModule,
     PortalModule,
   ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  hostDirectives: [NgxAppVersionDirective, SeoDirective],
 })
 export class AppComponent implements OnInit {
   private language = inject(LanguageService);

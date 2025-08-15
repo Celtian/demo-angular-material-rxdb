@@ -36,9 +36,6 @@ import { CustomConfirmDialog, CustomConfirmDialogService } from 'src/app/shared/
 
 @Component({
   selector: 'app-post-edit',
-  templateUrl: './post-edit.component.html',
-  styleUrl: './post-edit.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     RouterLink,
     LocalizeRouterModule,
@@ -52,6 +49,9 @@ import { CustomConfirmDialog, CustomConfirmDialogService } from 'src/app/shared/
     PortalModule,
     PostDeleteDirective,
   ],
+  templateUrl: './post-edit.component.html',
+  styleUrl: './post-edit.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PostEditComponent implements OnInit, OnDestroy, CanComponentDeactivate {
   private breadcrumbsPortalService = inject(BreadcrumbsPortalService);

@@ -30,6 +30,8 @@ module.exports = tseslint.config(
           style: 'kebab-case',
         },
       ],
+      '@angular-eslint/sort-keys-in-type-decorator': 'error',
+      '@angular-eslint/prefer-output-readonly': 'error',
     },
   },
   {

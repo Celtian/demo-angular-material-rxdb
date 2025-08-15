@@ -5,9 +5,9 @@ import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-not-found',
+  imports: [MatCardModule, MatIconModule, TranslateModule],
   templateUrl: './not-found.component.html',
   styleUrl: './not-found.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [MatCardModule, MatIconModule, TranslateModule],
 })
 export class NotFoundComponent {}

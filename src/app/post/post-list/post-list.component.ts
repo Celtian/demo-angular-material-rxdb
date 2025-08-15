@@ -37,9 +37,6 @@ import { RxdbProvider } from 'src/app/shared/services/db.service';
 
 @Component({
   selector: 'app-post-list',
-  templateUrl: './post-list.component.html',
-  styleUrl: './post-list.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     RouterLink,
     LocalizeRouterModule,
@@ -57,6 +54,9 @@ import { RxdbProvider } from 'src/app/shared/services/db.service';
     PortalModule,
     PostDeleteDirective,
   ],
+  templateUrl: './post-list.component.html',
+  styleUrl: './post-list.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PostListComponent implements OnInit, OnDestroy {
   private apiService = inject<ApiService<PostDto>>(ApiService);
