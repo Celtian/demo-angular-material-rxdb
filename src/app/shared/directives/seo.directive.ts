@@ -1,7 +1,7 @@
-import { Directive, OnInit, Renderer2, DOCUMENT, inject } from '@angular/core';
+import { Directive, DOCUMENT, inject, OnInit, Renderer2 } from '@angular/core';
 import { Meta } from '@angular/platform-browser';
 import { NavigationEnd, Router } from '@angular/router';
-import { VERSION } from 'src/environments/version';
+import { VERSION_INFO } from 'src/app/version';
 
 @Directive({
   selector: '[appSeo]',
@@ -16,8 +16,8 @@ export class SeoDirective implements OnInit {
   private readonly siteName = 'RXDB demo';
 
   public ngOnInit(): void {
-    this.meta.updateTag({ name: 'author', content: VERSION.author.name });
-    this.meta.updateTag({ name: 'revised', content: VERSION.date });
+    this.meta.updateTag({ name: 'author', content: VERSION_INFO.author.name });
+    this.meta.updateTag({ name: 'revised', content: VERSION_INFO.date });
     this.meta.updateTag({ name: 'keywords', content: 'Demo' });
     this.meta.updateTag({ property: 'og:site_name', content: this.siteName });
     // this.meta.updateTag({ property: 'og:image', content: `${environment.domain}/assets/logos/og-image.png` });
