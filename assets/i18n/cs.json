@@ -33,7 +33,7 @@
     "post": {
       "body": {
         "label": "Obsah",
-        "placeholder": "Napiště něco zde…"
+        "placeholder": "Napište něco zde…"
       },
       "title": {
         "label": "Název"
@@ -138,7 +138,7 @@
       "arrow-icon": "Ikona šipky",
       "error-icon": "Ikona chyby",
       "select-page-of-posts": "Vyberte stránku příspěvků",
-      "show-actions": "Show actions",
+      "show-actions": "Zobrazit akce",
       "warning-icon": "Ikona varování"
     },
     "clear": "Vymazat",
