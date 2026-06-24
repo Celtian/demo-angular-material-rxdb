@@ -20,12 +20,12 @@ import { Router, RouterLink } from '@angular/router';
 import { LocalizeRouterModule, LocalizeRouterService } from '@gilsdav/ngx-translate-router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Observable, first } from 'rxjs';
-import { ROUTE_DEFINITION } from 'src/app/shared/constants/route-definition.constant';
-import { PostDto, PostInputDto } from 'src/app/shared/dto/post.dto';
-import { CanComponentDeactivate } from 'src/app/shared/guards/can-deactivate-guard.service';
-import { ApiService } from 'src/app/shared/services/api.service';
-import { BreadcrumbsPortalService } from 'src/app/shared/services/breadcrumbs-portal.service';
-import { CustomConfirmDialog, CustomConfirmDialogService } from 'src/app/shared/services/custom-confirm-dialog.service';
+import { ROUTE_DEFINITION } from '../../shared/constants/route-definition.constant';
+import { PostDto, PostInputDto } from '../../shared/dto/post.dto';
+import { CanComponentDeactivate } from '../../shared/guards/can-deactivate-guard.service';
+import { ApiService } from '../../shared/services/api.service';
+import { BreadcrumbsPortalService } from '../../shared/services/breadcrumbs-portal.service';
+import { CustomConfirmDialog, CustomConfirmDialogService } from '../../shared/services/custom-confirm-dialog.service';
 
 @Component({
   selector: 'app-post-create',

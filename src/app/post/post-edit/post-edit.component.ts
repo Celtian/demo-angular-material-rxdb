@@ -21,18 +21,18 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { LocalizeRouterModule, LocalizeRouterService } from '@gilsdav/ngx-translate-router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Observable, delay, first, switchMap } from 'rxjs';
-import { DataSource } from 'src/app/shared/classes/data-source';
-import { DEFAULT_POST } from 'src/app/shared/constants/post.constant';
-import { ROUTE_DEFINITION } from 'src/app/shared/constants/route-definition.constant';
-import { PostDeleteDirective } from 'src/app/shared/directives/post-delete.directive';
-import { PostDto } from 'src/app/shared/dto/post.dto';
-import { CanComponentDeactivate } from 'src/app/shared/guards/can-deactivate-guard.service';
-import { filterString } from 'src/app/shared/rxjs/filter-string';
-import { getParamId } from 'src/app/shared/rxjs/get-param-id';
-import { setInitialIfNotString } from 'src/app/shared/rxjs/set-initial-if-not-string';
-import { ApiService } from 'src/app/shared/services/api.service';
-import { BreadcrumbsPortalService } from 'src/app/shared/services/breadcrumbs-portal.service';
-import { CustomConfirmDialog, CustomConfirmDialogService } from 'src/app/shared/services/custom-confirm-dialog.service';
+import { DataSource } from '../../shared/classes/data-source';
+import { DEFAULT_POST } from '../../shared/constants/post.constant';
+import { ROUTE_DEFINITION } from '../../shared/constants/route-definition.constant';
+import { PostDeleteDirective } from '../../shared/directives/post-delete.directive';
+import { PostDto } from '../../shared/dto/post.dto';
+import { CanComponentDeactivate } from '../../shared/guards/can-deactivate-guard.service';
+import { filterString } from '../../shared/rxjs/filter-string';
+import { getParamId } from '../../shared/rxjs/get-param-id';
+import { setInitialIfNotString } from '../../shared/rxjs/set-initial-if-not-string';
+import { ApiService } from '../../shared/services/api.service';
+import { BreadcrumbsPortalService } from '../../shared/services/breadcrumbs-portal.service';
+import { CustomConfirmDialog, CustomConfirmDialogService } from '../../shared/services/custom-confirm-dialog.service';
 
 @Component({
   selector: 'app-post-edit',

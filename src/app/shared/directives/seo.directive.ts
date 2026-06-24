@@ -1,7 +1,7 @@
 import { Directive, DOCUMENT, inject, OnInit, Renderer2 } from '@angular/core';
 import { Meta } from '@angular/platform-browser';
 import { NavigationEnd, Router } from '@angular/router';
-import { VERSION_INFO } from 'src/app/version';
+import { VERSION_INFO } from '../../version';
 
 @Directive({
   selector: '[appSeo]',

@@ -25,15 +25,15 @@ import { ActivatedRoute, Params, Router, RouterLink } from '@angular/router';
 import { LocalizeRouterModule } from '@gilsdav/ngx-translate-router';
 import { TranslateModule } from '@ngx-translate/core';
 import { combineLatest, debounceTime, filter, first } from 'rxjs';
-import { ROUTE_DEFINITION } from 'src/app/shared/constants/route-definition.constant';
-import { PostDeleteDirective } from 'src/app/shared/directives/post-delete.directive';
-import { PostDto } from 'src/app/shared/dto/post.dto';
-import { getParamPage } from 'src/app/shared/rxjs/get-param-page';
-import { getParamQuery } from 'src/app/shared/rxjs/get-param-query';
-import { getParamSort } from 'src/app/shared/rxjs/get-param-sort';
-import { ApiService } from 'src/app/shared/services/api.service';
-import { BreadcrumbsPortalService } from 'src/app/shared/services/breadcrumbs-portal.service';
-import { RxdbProvider } from 'src/app/shared/services/db.service';
+import { ROUTE_DEFINITION } from '../../shared/constants/route-definition.constant';
+import { PostDeleteDirective } from '../../shared/directives/post-delete.directive';
+import { PostDto } from '../../shared/dto/post.dto';
+import { getParamPage } from '../../shared/rxjs/get-param-page';
+import { getParamQuery } from '../../shared/rxjs/get-param-query';
+import { getParamSort } from '../../shared/rxjs/get-param-sort';
+import { ApiService } from '../../shared/services/api.service';
+import { BreadcrumbsPortalService } from '../../shared/services/breadcrumbs-portal.service';
+import { RxdbProvider } from '../../shared/services/db.service';
 
 @Component({
   selector: 'app-post-list',
