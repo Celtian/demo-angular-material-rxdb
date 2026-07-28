@@ -1,5 +1,5 @@
 name: Get & Cache Dependencies
-description: Get dependencies via yarn and cache them
+description: Get dependencies via Bun and cache them
 inputs:
   caching:
     description: Whether to cache dependencies or not
@@ -8,7 +8,7 @@ inputs:
 outputs:
   used-cache:
     description: Whether the cache was used
-    value: ${{ steps.install.outputs.cache }}
+    value: ${{ steps.cache.outputs.cache-hit }}
 runs:
   using: composite
   steps:
@@ -18,22 +18,17 @@ runs:
       uses: actions/cache@v6
       with:
         path: node_modules
-        key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+        key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lock') }}
         restore-keys: |
-          ${{ runner.OS }}-yarn-${{ env.cache-name }}-
-          ${{ runner.OS }}-yarn-
-          ${{ runner.OS }}-
+          ${{ runner.os }}-bun-
+          ${{ runner.os }}-
 
     - name: Install
       if: steps.cache.outputs.cache-hit != 'true' || inputs.caching != 'true'
-      id: install
-      run: |
-        yarn install --frozen-lockfile
-        echo "cache='${{ inputs.caching }}'" >> $GITHUB_OUTPUT
+      run: bun ci
       shell: bash
 
     - name: Postinstall
       if: steps.cache.outputs.cache-hit == 'true' && inputs.caching == 'true'
-      id: postinstall
-      run: yarn postinstall
+      run: bun run postinstall
       shell: bash

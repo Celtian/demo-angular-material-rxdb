@@ -10,10 +10,10 @@
 
 ## 🛠️ Instalation
 
-Definitelly works with Node `v24.0.2` & yarn `1.22.21`
+Definitelly works with Node `v24.0.2` & Bun `1.3.14`
 
 ```
-yarn install
+bun install
 ```
 
 _Consider to install vscode with recommended extensions in `.vscode/extensions.json` before you start_
@@ -23,13 +23,13 @@ _Consider to use `WSL` if you are developing on `Windows` to prevent unsupported
 ## 🚀 Development server
 
 ```
-yarn start
+bun run start
 ```
 
 ## 📦 Build
 
 ```
-yarn build
+bun run build
 ```
 
 ## 🚀 Deploy

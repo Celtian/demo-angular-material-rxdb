@@ -24,6 +24,11 @@ jobs:
         with:
           node-version-file: .nvmrc
 
+      - name: 🗜️ Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.3.14
+
       - name: 🛠️ Set git info
         uses: ./.github/actions/git-info
 
@@ -31,13 +36,13 @@ jobs:
         uses: ./.github/actions/cached-deps
 
       - name: 🧹 Lint
-        run: yarn lint
+        run: bun run lint
 
       - name: 🧪 Test
-        run: yarn test
+        run: bun run test
 
       - name: 📦 Build demo app
-        run: yarn build --base-href https://celtian.github.io/demo-angular-material-rxdb/
+        run: bun run build --base-href https://celtian.github.io/demo-angular-material-rxdb/
 
       - name: 🛠️ Copy index.html to 404.html
         run: cp ./dist/demo-angular-material-rxdb/browser/index.html ./dist/demo-angular-material-rxdb/browser/404.html

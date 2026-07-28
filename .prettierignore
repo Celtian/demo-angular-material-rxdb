@@ -1,6 +1,6 @@
 package.json
 package-lock.json
-yarn.lock
+bun.lock
 dist
 .angulardoc.json
 .vscode/*

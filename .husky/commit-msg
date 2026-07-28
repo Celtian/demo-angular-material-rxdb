@@ -1,1 +1,1 @@
-npx --no-install commitlint --edit
+bunx --no-install quick-commitlint "$1"
